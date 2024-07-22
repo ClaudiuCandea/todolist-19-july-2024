@@ -1,0 +1,20 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "name": "Mananca",
+      "description": "Orice",
+      "category": "categ1",
+      "createdAt": "2024-07-22",
+      "updatedAt": "2024-07-22"
+    },
+    {
+      "id": 2,
+      "name": "Mergi la Deadpool",
+      "description": "La 4DX",
+      "category": "categ2",
+      "createdAt": "2024-07-22",
+      "updatedAt": "2024-07-25"
+    }
+  ]
+}
