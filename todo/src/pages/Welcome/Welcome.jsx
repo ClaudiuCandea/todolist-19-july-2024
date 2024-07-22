@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { getData } from "../api/quotableAPI";
+import { getData } from "./quotableAPI";
 import Lottie from "react-lottie";
-import tree from "../lottie/tree";
+import tree from "./tree.json";
 
 const defaultOptions = {
   animationData: tree,
@@ -27,7 +27,7 @@ function Welcome() {
     }
   };
 
-  if (quoteAuth == "" && quoteText == "") fetchData();
+  if (quoteAuth === "" && quoteText === "") fetchData();
 
   return (
     <div id="container" className=" flex flex-col h-screen gap-0">
