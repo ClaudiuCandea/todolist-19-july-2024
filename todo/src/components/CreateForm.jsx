@@ -2,14 +2,14 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { postTodo } from '../services/TodoService/TodoService';
 
-function handleSubmit(values){
-    values.createdAt = new Date()
-    values.updatedAt =  new Date()
-    postTodo(values)
-}
-
-
 const CreateTodoForm = ({initialValues}) => {
+
+    function handleSubmit(values){
+        values.createdAt = new Date()
+        values.updatedAt =  new Date()
+        postTodo(values)
+    } 
+    
     return(
         <Formik 
             initialValues={initialValues}
@@ -25,7 +25,7 @@ const CreateTodoForm = ({initialValues}) => {
                 <lable className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category">Category</lable>
                 <Field className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name='category' type='text'></Field>
 
-                <button className="flex justify-center align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" type="submit">Create</button>
+                <button className="align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" type="submit">Create</button>
             </Form>
         </Formik>
     )
