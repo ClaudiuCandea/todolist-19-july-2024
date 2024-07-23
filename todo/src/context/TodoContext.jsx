@@ -69,6 +69,8 @@ export function TodoProvider({ children }) {
     }
   }
 
+  const value = { state, dispatch, updateTodoById, getTodoById};
+
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 }
 
