@@ -3,7 +3,7 @@ import { getQuote } from "../../services/Utilitare/quotableAPI";
 import Lottie from "react-lottie";
 import tree from "./tree.json";
 import Navbar from "../../components/Navbar";
-
+import { toast } from "react-hot-toast";
 const defaultOptions = {
   animationData: tree,
   rendererSettings: {
@@ -22,8 +22,9 @@ function Welcome() {
       const { content, author } = await getQuote();
       setQuoteText(content);
       setQuoteAuth(author);
+      throw new Error("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     } catch (error) {
-      console.error(error.message);
+      toast.error(error);
     }
   };
 
