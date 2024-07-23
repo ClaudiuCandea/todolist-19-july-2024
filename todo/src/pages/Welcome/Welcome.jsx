@@ -38,7 +38,7 @@ function Welcome() {
     <div id="container" className=" flex flex-col h-screen gap-0">
       <Navbar
         anchorList={[
-          { text: "Home", ref: ".", style: "bg-red-500" },
+          { text: "Home", ref: ".", style: "" },
           { text: "Gallery", ref: ".", style: "" },
           { text: "Contact", ref: ".", style: "" },
         ]}
