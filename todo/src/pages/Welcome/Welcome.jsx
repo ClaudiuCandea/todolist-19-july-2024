@@ -1,7 +1,8 @@
-import React, { Suspense, useState } from "react";
+import React, { useState } from "react";
 import { getData } from "./quotableAPI";
 import Lottie from "react-lottie";
 import tree from "./tree.json";
+import Navbar from "../../components/Navbar";
 
 const defaultOptions = {
   animationData: tree,
@@ -35,19 +36,13 @@ function Welcome() {
 
   return (
     <div id="container" className=" flex flex-col h-screen gap-0">
-      <div id="nav-wrapper" className="">
-        <nav className="flex justify-end border-double border-b-2 border-black p-2 gap-x-2">
-          <a className="hover:bg-gray-300 rounded-xl p-2" href="">
-            Home
-          </a>
-          <a className="hover:bg-gray-300 rounded-xl p-2" href="">
-            Gallery
-          </a>
-          <a className="hover:bg-gray-300 rounded-xl p-2" href="">
-            Contact
-          </a>
-        </nav>
-      </div>
+      <Navbar
+        anchorList={[
+          { text: "Home", ref: ".", style: "bg-red-500" },
+          { text: "Gallery", ref: ".", style: "" },
+          { text: "Contact", ref: ".", style: "" },
+        ]}
+      />
       <div id="lottie" className=" justify-end w-auto h-auto p-5 bg-cyan-900">
         <Lottie options={defaultOptions} height={400} width={400} speed={0.4} />
       </div>
