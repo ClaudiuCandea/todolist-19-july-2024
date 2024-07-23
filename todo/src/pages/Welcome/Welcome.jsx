@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { getData } from "./quotableAPI";
 import Lottie from "react-lottie";
 import tree from "./tree.json";
@@ -16,12 +16,16 @@ const defaultOptions = {
 function Welcome() {
   const [quoteText, setQuoteText] = useState("");
   const [quoteAuth, setQuoteAuth] = useState("");
+
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   const fetchData = async () => {
     try {
       const { content, author } = await getData();
+      delay(10000000);
       setQuoteText(content);
       setQuoteAuth(author);
-      console.log(`Quote: ${content} - Author: ${author}`);
+      //console.log(`Quote: ${content} - Author: ${author}`);
     } catch (error) {
       console.error(error.message);
     }
@@ -32,7 +36,7 @@ function Welcome() {
   return (
     <div id="container" className=" flex flex-col h-screen gap-0">
       <div id="nav-wrapper" className="">
-        <nav className="flex justify-end border-double border-b-2 border-black">
+        <nav className="flex justify-end border-double border-b-2 border-black p-2 gap-x-2">
           <a className="hover:bg-gray-300 rounded-xl p-2" href="">
             Home
           </a>
@@ -55,9 +59,19 @@ function Welcome() {
         <text id="big-title" className=" text-8xl">
           WELCOME
         </text>
-        <text id="big-title" className=" text-justify">
-          {quoteText} - {quoteAuth}
-        </text>
+        {quoteText === "" && quoteAuth === "" ? (
+          <div class="flex justify-center items-center h-full">
+            <img
+              class="h-16 w-16"
+              src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
+              alt=""
+            ></img>
+          </div>
+        ) : (
+          <text id="big-title" className=" text-justify">
+            {quoteText} - {quoteAuth}
+          </text>
+        )}
       </div>
     </div>
   );
