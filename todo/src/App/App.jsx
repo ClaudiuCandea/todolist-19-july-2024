@@ -1,15 +1,15 @@
-import '../App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import React from 'react';
-import Home from '../pages/Home/HomePage';
-import TodoListPage from '../pages/ToDo/List/ListPage';
-import TodoUpdatePage from '../pages/ToDo/Update/UpdatePage';
-import TodoCreatePage from '../pages/ToDo/Create/CreatePage';
+import "../App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React from "react";
+import TodoListPage from "../pages/ToDo/List/ListPage";
+import TodoUpdatePage from "../pages/ToDo/Update/UpdatePage";
+import TodoCreatePage from "../pages/ToDo/Create/CreatePage";
+import Welcome from "../pages/Home/Welcome";
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Welcome />} />
         <Route path="/todo" element={<TodoListPage />} />
         <Route path="/todo/:id" element={<TodoUpdatePage />} />
         <Route path="/todo/create" element={<TodoCreatePage />} />

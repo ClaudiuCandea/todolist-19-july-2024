@@ -1,4 +1,4 @@
-export async function getData() {
+export async function getQuote() {
   const url = "https://api.quotable.io/random";
   try {
     const response = await fetch(url);
