@@ -1,7 +1,7 @@
 {
   "todos": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Mananca",
       "description": "Orice",
       "category": "categ1",
@@ -9,28 +9,20 @@
       "updatedAt": "2024-07-22"
     },
     {
-      "id": 2,
-      "name": "Mergi la Deadpool",
+      "id": "2",
+      "name": "Mergi la Deadpoodsal",
       "description": "La 4DX",
       "category": "categ2",
       "createdAt": "2024-07-22",
-      "updatedAt": "2024-07-25"
+      "updatedAt": "2024-07-23T10:36:01.900Z"
     },
     {
-      "id": "2f79",
-      "name": "asdasdas",
-      "description": "asdasdas",
-      "category": "asdas",
-      "createdAt": "2024-07-22T10:18:48.408Z",
-      "updatedAt": "2024-07-22T10:18:48.408Z"
-    },
-    {
-      "id": "0ad2",
-      "name": "asdasdas",
-      "description": "asdasdas",
-      "category": "asdas",
-      "createdAt": "2024-07-22T10:19:23.043Z",
-      "updatedAt": "2024-07-22T10:19:23.043Z"
+      "id": "63f0",
+      "name": "fsa",
+      "description": "fsafas",
+      "category": "fsafas",
+      "createdAt": "2024-07-23T10:35:47.024Z",
+      "updatedAt": "2024-07-23T10:35:47.024Z"
     }
   ]
 }
