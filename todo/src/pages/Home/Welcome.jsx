@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Lottie from "react-lottie";
 import tree from "./tree.json";
 import Navbar from "../../components/Navbar";
@@ -15,15 +15,19 @@ const defaultOptions = {
   renderer: "svg",
 };
 
-function Welcome() {
+function Welcome(paths) {
+  const mokRoutes = useMemo(() => {
+    return paths == []
+      ? paths
+      : [
+          { text: "Home", ref: ".", style: "" },
+          { text: "Gallery", ref: ".", style: "" },
+          { text: "Contact", ref: ".", style: "" },
+        ];
+  }, [paths]);
+
   const { data, isLoading, error } = useQuote();
   error && toast.error(error);
-
-  const mokRoutes = [
-    { text: "Home", ref: ".", style: "" },
-    { text: "Gallery", ref: ".", style: "" },
-    { text: "Contact", ref: ".", style: "" },
-  ];
 
   return (
     <div id="container" className=" flex flex-col h-screen gap-0">
