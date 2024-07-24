@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { getQuote } from "../../services/Utilitare/quotableAPI";
+import React from "react";
 import Lottie from "react-lottie";
 import tree from "./tree.json";
 import Navbar from "../../components/Navbar";
 import { toast } from "react-hot-toast";
+import { useQuote } from "../../services/Utilitare/hooks";
+
 const defaultOptions = {
   animationData: tree,
   rendererSettings: {
@@ -15,25 +16,14 @@ const defaultOptions = {
 };
 
 function Welcome() {
-  const [quoteText, setQuoteText] = useState("");
-  const [quoteAuth, setQuoteAuth] = useState("");
-  const fetchData = async () => {
-    try {
-      const { content, author } = await getQuote();
-      setQuoteText(content);
-      setQuoteAuth(author);
-      throw new Error("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    } catch (error) {
-      toast.error(error);
-    }
-  };
+  const { data, isLoading, error } = useQuote();
+  error && toast.error(error);
 
   const mokRoutes = [
     { text: "Home", ref: ".", style: "" },
     { text: "Gallery", ref: ".", style: "" },
     { text: "Contact", ref: ".", style: "" },
   ];
-  if (quoteAuth === "" && quoteText === "") fetchData();
 
   return (
     <div id="container" className=" flex flex-col h-screen gap-0">
@@ -49,7 +39,7 @@ function Welcome() {
         <text id="big-title" className=" text-8xl">
           WELCOME
         </text>
-        {quoteText === "" && quoteAuth === "" ? (
+        {isLoading ? (
           <div class="flex justify-center items-center">
             <img
               class="h-14 w-14"
@@ -59,7 +49,7 @@ function Welcome() {
           </div>
         ) : (
           <text id="big-title" className=" text-justify">
-            {quoteText} - {quoteAuth}
+            {data.content} - {data.author}
           </text>
         )}
       </div>
