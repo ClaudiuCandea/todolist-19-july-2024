@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
-export const useQuote = (url) => {
-  if (!url) url = process.env.REACT_APP_GET_QUOTE_URL;
+export const useQuote = () => {
+  const url = useMemo(() => {
+    return process.env.REACT_APP_GET_QUOTE_URL;
+  }, []);
 
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
