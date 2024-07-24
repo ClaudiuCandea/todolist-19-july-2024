@@ -15,15 +15,3 @@ export const postTodo = (values) => {
            toast.error("Could not create todo")
          })
 }
-
-export const getTodos =  () =>{
-   const url = process.env.REACT_APP_JSON_SERVER_URL + Endpoints.toDo
-   return  fetch(url,{
-      method:'GET',
-   })
-    .then((response) => response.json())
-    .then((responseData) => {
-      console.log(responseData);
-      return responseData;
-    })
-}
