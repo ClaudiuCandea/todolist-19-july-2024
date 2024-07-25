@@ -4,7 +4,7 @@ import { CiCalendar } from "react-icons/ci";
 import { GrUpdate } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
 
-function TodoItem({ todo, deleteTask}) {
+function TodoItem({ todo }) {
     const navigate = useNavigate();
 
     return (
@@ -32,12 +32,12 @@ function TodoItem({ todo, deleteTask}) {
             <div className="text-sm text-gray-500 flex justify-between">
                 <div className="flex gap-1 items-center">
                     <CiCalendar className="text-2xl"/>
-                    <p>{todo.createdAt}</p>
+                    <p>{new Date(todo.createdAt).toLocaleDateString()}</p>
                 </div>
                 <div className="flex gap-1 items-center">{todo.updatedAt && (
                     <>
                         <GrUpdate className="text-sm" />
-                        <p>{todo.updatedAt}</p>
+                        <p>{new Date(todo.updatedAt).toLocaleDateString()}</p>
                     </>
                 )}
                 </div>
