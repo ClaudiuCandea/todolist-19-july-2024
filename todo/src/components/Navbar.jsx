@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar({ wrapperStyle, navStyle, anchorList }) {
+export default function Navbar({
+  wrapperStyle,
+  navStyle,
+  anchorList,
+  buttons,
+}) {
   console.log(anchorList);
   return (
     <div id="nav-wrapper" className={wrapperStyle ? wrapperStyle : ""}>
@@ -16,6 +21,18 @@ export default function Navbar({ wrapperStyle, navStyle, anchorList }) {
               >
                 {text}
               </Link>
+            );
+          })}
+        {buttons &&
+          buttons.map(({ text, handleClick, style }, index) => {
+            return (
+              <button
+                key={index}
+                onClick={handleClick}
+                className={style ? style : "hover:bg-gray-300 rounded-xl p-2"}
+              >
+                {text}
+              </button>
             );
           })}
       </nav>
