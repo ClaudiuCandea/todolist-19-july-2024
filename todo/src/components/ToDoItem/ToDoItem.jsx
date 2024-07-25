@@ -2,8 +2,11 @@ import React from 'react';
 import { MdDelete, MdEdit } from "react-icons/md";
 import { CiCalendar } from "react-icons/ci";
 import { GrUpdate } from "react-icons/gr";
+import { useNavigate } from 'react-router-dom';
 
-function TodoItem({ todo, deleteTask, editTask }) {
+function TodoItem({ todo, deleteTask}) {
+    const navigate = useNavigate();
+
     return (
         <div className="bg-white shadow-md rounded-lg p-6 mb-4 flex flex-col break-words md:flex-1 h-full">
             <div className="flex justify-between items-center mb-4">
@@ -13,6 +16,7 @@ function TodoItem({ todo, deleteTask, editTask }) {
                 </div>
                 <div className="flex gap-1">
                     <button
+                        onClick={() => navigate(`/todo/${todo.id}`)}
                         className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition duration-200"
                     >
                         <MdEdit className="text-2xl" />
