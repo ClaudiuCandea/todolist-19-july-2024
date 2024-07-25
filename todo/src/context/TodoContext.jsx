@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer, useEffect, useState } from 'react';
 import TodoService from '../services/TodoService/TodoService';
 
 export const TodoContext = createContext();
@@ -69,7 +69,7 @@ export function TodoProvider({ children }) {
     }
   }
 
-  const value = { state, dispatch, updateTodoById, getTodoById};
+  const value = { state, dispatch, updateTodoById, getTodoById };
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 }
