@@ -1,11 +1,11 @@
-import "../App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import React from "react";
-import TodoListPage from "../pages/ToDo/List/ListPage";
-import TodoUpdatePage from "../pages/ToDo/Update/UpdatePage";
-import TodoCreatePage from "../pages/ToDo/Create/CreatePage";
-import Welcome from "../pages/Home/Welcome";
-import { Toaster } from "react-hot-toast";
+import '../App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import TodoListPage from '../pages/ToDo/List/ListPage';
+import TodoUpdatePage from '../pages/ToDo/Update/UpdatePage';
+import TodoCreatePage from '../pages/ToDo/Create/CreatePage';
+import { Toaster } from 'react-hot-toast';
+import Welcome from '../pages/Home/Welcome';
 function App() {
   return (
     <Router>

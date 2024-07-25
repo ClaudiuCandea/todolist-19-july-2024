@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { postTodo } from '../services/TodoService/TodoService';
+import  postTodo  from '../services/TodoService/TodoService';
 
 const CreateTodoForm = ({initialValues}) => {
 

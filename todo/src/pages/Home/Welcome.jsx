@@ -44,9 +44,9 @@ function Welcome(paths) {
           WELCOME
         </text>
         {isLoading ? (
-          <div class="flex justify-center items-center">
+          <div className="flex justify-center items-center">
             <img
-              class="h-14 w-14"
+              className="h-14 w-14"
               src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
               alt=""
             ></img>
