@@ -1,34 +1,34 @@
-import React, {useContext} from 'react';
+import React, { useContext } from "react";
 import { IoMdAdd } from "react-icons/io";
 import ToDoItem from "../../../components/ToDoItem";
-import {useNavigate} from "react-router-dom";
-import { TodoContext } from '../../../context/TodoContext';
+import { useNavigate } from "react-router-dom";
+import { TodoContext } from "../../../context/TodoContext";
 
 const TodoListPage = () => {
-    const navigate = useNavigate();
-    const { state } = useContext(TodoContext);
+  const navigate = useNavigate();
+  const { state } = useContext(TodoContext);
 
-    return (
-        <div className="container mx-auto p-6">
-            <div className="flex flex-col items-start gap-8 mb-6">
-                <h2 className="text-3xl">Todo List</h2>
-                <button
-                    onClick={() => navigate(`/todo/create`)}
-                    className="text-white font-bold bg-blue-500 transition duration-200 hover:bg-blue-300 px-4 py-2 rounded flex items-center"
-                >
-                    <IoMdAdd className="text-xl" />
-                    Add Task
-                </button>
-            </div>
-            <ul className="todo-list grid grid-cols-1 xl:grid-cols-2 gap-4">
-                {state.todos.map((todo) => (
-                    <li className="todo-item md:flex" key={todo.id}>
-                        <ToDoItem todo={todo} />
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+  return (
+    <div className="container mx-auto p-6">
+      <div className="flex flex-col items-start gap-8 mb-6">
+        <h2 className="text-3xl">Todo List</h2>
+        <button
+          onClick={() => navigate(`/todo/create`)}
+          className="text-white font-bold bg-blue-500 transition duration-200 hover:bg-blue-300 px-4 py-2 rounded flex items-center"
+        >
+          <IoMdAdd className="text-xl" />
+          Add Task
+        </button>
+      </div>
+      <ul className="todo-list grid grid-cols-1 xl:grid-cols-2 gap-4">
+        {state.todos.map((todo) => (
+          <li className="todo-item md:flex" key={todo.id}>
+            <ToDoItem todo={todo} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default TodoListPage;
