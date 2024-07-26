@@ -76,7 +76,7 @@ export function TodoProvider({ children }) {
 
   const getTodoById = async (id) => {
     try {
-      const todo = state.todos.reduc((todo) => todo.id === id);
+      const todo = state.todos.find((todo) => todo.id === id);
       return todo;
     } catch (error) {
       console.log("Todo fetch error", error);
