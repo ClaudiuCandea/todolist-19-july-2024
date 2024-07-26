@@ -25,8 +25,7 @@ function App() {
         <Route path="/todo/:id" element={isAuthenticated ? <TodoUpdatePage /> : <Navigate to="/login" />} />
         <Route path="/todo/create" element={isAuthenticated ? <TodoCreatePage /> : <Navigate to="/login" />} />
         <Route path="/" element={<Navigate to="/login" />} />
-        // TODO! This is not working as expected
-        {/* <Route path="*" element={!isAuthenticated ? <LoginPage /> : <Navigate to="/home"/>} /> */}
+        <Route path="*" element={!isAuthenticated ? <Navigate to="/login"/> : <Navigate to="/home"/>} />
       </Routes>
       <Toaster />
     </Router>
