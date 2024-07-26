@@ -33,7 +33,11 @@ function Home() {
         buttons={[
           {
             text: "LogOut",
-            handleClick: () => {},
+            handleClick: () => {
+              localStorage.removeItem("isAuthenticated");
+              localStorage.removeItem("profile");
+              window.location.reload();
+            },
             style: "hover:bg-red-300 bg-red-600 rounded-xl p-2",
           },
         ]}

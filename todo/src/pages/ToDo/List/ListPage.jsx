@@ -8,6 +8,9 @@ const TodoListPage = () => {
     const navigate = useNavigate();
     const { state } = useContext(TodoContext);
 
+    const profile = localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile')) : null;
+    const filteredTodos = state?.todos?.filter(todo => todo.userId === profile.id);
+
     return (
         <div className="container mx-auto p-6">
             <div className="flex flex-col items-start gap-8 mb-6">
@@ -21,7 +24,7 @@ const TodoListPage = () => {
                 </button>
             </div>
             <ul className="todo-list grid grid-cols-1 xl:grid-cols-2 gap-4">
-                {state.todos.map((todo) => (
+                {filteredTodos.map((todo) => (
                     <li className="todo-item md:flex" key={todo.id}>
                         <ToDoItem todo={todo} />
                     </li>
