@@ -18,20 +18,24 @@ function GoogleLogin() {
         onError: (error) => console.log('Login Failed:', error)
     });
 
+    const fetchUserProfile = (accessToken) => {
+        axios
+            .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    Accept: 'application/json'
+                }
+            })
+            .then((res) => {
+                localStorage.setItem('profile', JSON.stringify(res.data));
+                window.location.reload();
+            })
+            .catch((err) => console.log(err));
+    };
+
     useEffect(() => {
         if (user) {
-            axios
-                .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
-                    headers: {
-                        Authorization: `Bearer ${user.access_token}`,
-                        Accept: 'application/json'
-                    }
-                })
-                .then((res) => {
-                    localStorage.setItem('profile', JSON.stringify(res.data));
-                    window.location.reload();
-                })
-                .catch((err) => console.log(err));
+            fetchUserProfile(user.access_token);
         }
     }, [user, navigate]);
 
@@ -39,16 +43,6 @@ function GoogleLogin() {
     return (
         <div className="flex justify-center items-center min-h-screen bg-slate-700">
             <div className="max-w-md w-full p-4">
-                {/* {profile ? (
-                    <div className="p-4 shadow rounded-lg bg-white">
-                        <img src={profile.picture} alt="user image" className="w-24 h-24 rounded-full mx-auto" />
-                        <h3 className="text-lg font-semibold text-center mt-2">User Logged in</h3>
-                        <p className="mt-2"><strong>Name:</strong> {profile.name}</p>
-                        <p><strong>Email Address:</strong> {profile.email}</p>
-                        <button onClick={handleLogout} className="mt-4 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-150 ease-in-out w-full">Log out</button>
-                        <Link to="/home" className="mt-4 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-150 ease-in-out w-full">Plceholder To Home</Link>
-                    </div>
-                ) : ( */}
                 <div className="p-4 shadow rounded-lg ">
                     <button onClick={handleLogin} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-150 ease-in-out w-full">Sign in with Google 🚀</button>
                 </div>
