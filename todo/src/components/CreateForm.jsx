@@ -1,7 +1,14 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
+import TodoService from '../services/TodoService/TodoService';
 
-const CreateTodoForm = ({initialValues,handleSubmit}) => {
+const CreateTodoForm = ({initialValues}) => {
+
+    function handleSubmit(values){
+        values.createdAt = new Date()
+        values.updatedAt =  new Date()
+        TodoService.postTodo(values)
+    } 
     
     return(
         <Formik 

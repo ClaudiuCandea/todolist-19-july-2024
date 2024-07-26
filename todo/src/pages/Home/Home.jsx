@@ -1,37 +1,43 @@
 import React, { useMemo } from "react";
 import Lottie from "react-lottie";
-import tree from "./tree.json";
+import tree from "../../utilitare/tree.json";
 import Navbar from "../../components/Navbar";
 import { toast } from "react-hot-toast";
-import { useQuote } from "../../services/Utilitare/hooks";
+import { useQuote } from "../../utilitare/hooks";
+import { routesCfg } from "../../routes/routes";
 
-const defaultOptions = {
-  animationData: tree,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  },
-  loop: false,
-  autoplay: true,
-  renderer: "svg",
-};
+function Home() {
+  const routes = useMemo(() => {
+    return routesCfg;
+  }, []);
 
-function Welcome(paths) {
-  const mokRoutes = useMemo(() => {
-    return paths == []
-      ? paths
-      : [
-          { text: "Home", ref: ".", style: "" },
-          { text: "Gallery", ref: ".", style: "" },
-          { text: "Contact", ref: ".", style: "" },
-        ];
-  }, [paths]);
+  const defaultOptions = useMemo(() => {
+    return {
+      animationData: tree,
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice",
+      },
+      loop: false,
+      autoplay: true,
+      renderer: "svg",
+    };
+  }, []);
 
   const { data, isLoading, error } = useQuote();
   error && toast.error(error);
 
   return (
     <div id="container" className=" flex flex-col h-screen gap-0">
-      <Navbar anchorList={mokRoutes} />
+      <Navbar
+        anchorList={routes}
+        buttons={[
+          {
+            text: "LogOut",
+            handleClick: () => {},
+            style: "hover:bg-red-300 bg-red-600 rounded-xl p-2",
+          },
+        ]}
+      />
       <div id="lottie" className=" justify-end w-auto h-auto p-5 bg-cyan-900">
         <Lottie options={defaultOptions} height={400} width={400} speed={0.4} />
       </div>
@@ -44,9 +50,9 @@ function Welcome(paths) {
           WELCOME
         </text>
         {isLoading ? (
-          <div class="flex justify-center items-center">
+          <div className="flex justify-center items-center">
             <img
-              class="h-14 w-14"
+              className="h-14 w-14"
               src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
               alt=""
             ></img>
@@ -61,4 +67,4 @@ function Welcome(paths) {
   );
 }
 
-export default Welcome;
+export default Home;

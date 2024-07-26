@@ -39,6 +39,14 @@
       "category": "asd",
       "createdAt": "2024-07-24T09:42:37.910Z",
       "updatedAt": "2024-07-24T09:42:37.910Z"
+    },
+    {
+      "id": "2fe8",
+      "name": "asds",
+      "description": "asd",
+      "category": "sad",
+      "createdAt": "2024-07-26T08:22:03.574Z",
+      "updatedAt": "2024-07-26T08:22:03.574Z"
     }
   ]
 }
