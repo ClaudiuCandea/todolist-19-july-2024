@@ -5,7 +5,7 @@ export default function Navbar({
   wrapperStyle,
   navStyle,
   anchorList,
-  buttons,
+  profileComponent,
 }) {
   console.log(anchorList);
   return (
@@ -23,18 +23,7 @@ export default function Navbar({
               </Link>
             );
           })}
-        {buttons &&
-          buttons.map(({ text, handleClick, style }, index) => {
-            return (
-              <button
-                key={index}
-                onClick={handleClick}
-                className={style ? style : "hover:bg-gray-300 rounded-xl p-2"}
-              >
-                {text}
-              </button>
-            );
-          })}
+        {profileComponent}
       </nav>
     </div>
   );
