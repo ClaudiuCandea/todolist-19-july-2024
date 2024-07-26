@@ -1,5 +1,5 @@
-import React, { createContext, useReducer, useEffect } from 'react';
-import TodoService from '../services/TodoService/TodoService';
+import React, { createContext, useReducer, useEffect } from "react";
+import TodoService from "../services/TodoService/TodoService";
 
 export const TodoContext = createContext();
 
@@ -9,11 +9,11 @@ const initialState = {
 };
 
 const ACTIONS = {
-  SET_TODOS: 'SET_TODOS',
-  ADD_TODO: 'ADD_TODO',
-  REMOVE_TODO: 'REMOVE_TODO',
-  TOGGLE_TODO: 'TOGGLE_TODO',
-  SET_LOADING: 'SET_LOADING',
+  SET_TODOS: "SET_TODOS",
+  ADD_TODO: "ADD_TODO",
+  REMOVE_TODO: "REMOVE_TODO",
+  TOGGLE_TODO: "TOGGLE_TODO",
+  SET_LOADING: "SET_LOADING",
 };
 
 function todoReducer(state, action) {
@@ -23,12 +23,17 @@ function todoReducer(state, action) {
     case ACTIONS.ADD_TODO:
       return { ...state, todos: [...state.todos, action.payload] };
     case ACTIONS.REMOVE_TODO:
-      return { ...state, todos: state.todos.filter(todo => todo.id !== action.payload) };
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.payload),
+      };
     case ACTIONS.TOGGLE_TODO:
       return {
         ...state,
-        todos: state.todos.map(todo =>
-          todo.id === action.payload ? { ...todo, completed: !todo.completed } : todo
+        todos: state.todos.map((todo) =>
+          todo.id === action.payload
+            ? { ...todo, completed: !todo.completed }
+            : todo
         ),
       };
     case ACTIONS.SET_LOADING:
@@ -54,23 +59,43 @@ export function TodoProvider({ children }) {
   const updateTodoById = async (id, todo) => {
     try {
       const updatedTodo = await TodoService.updateTodoById(id, todo);
-      dispatch({ type: ACTIONS.SET_TODOS, payload: state.todos.map(t => (t.id === id ? updatedTodo : t)) });
+      dispatch({
+        type: ACTIONS.SET_TODOS,
+        payload: state.todos.map((t) => (t.id === id ? updatedTodo : t)),
+      });
     } catch (error) {
-      console.log('Todo update error', error);
+      console.log("Todo update error", error);
     }
-  }
+  };
 
   const getTodoById = async (id) => {
     try {
-      const todo = state.todos.find(todo => todo.id === id);
+      const todo = state.todos.reduc((todo) => todo.id === id);
       return todo;
     } catch (error) {
-      console.log('Todo fetch error', error);
+      console.log("Todo fetch error", error);
     }
-  }
+  };
 
-  const value = { state, dispatch, updateTodoById, getTodoById};
+  const deleteTodo = async (id) => {
+    try {
+      const deletedToDo = await TodoService.deleteTodoById(id);
+      dispatch({
+        type: ACTIONS.SET_TODOS,
+        payload: state.todos.filter((t) => t.id !== deletedToDo.id),
+      });
+    } catch (error) {
+      console.log("Todo fetch error", error);
+    }
+  };
+
+  const value = {
+    state,
+    dispatch,
+    updateTodoById,
+    getTodoById,
+    deleteTodo,
+  };
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 }
-
