@@ -6,7 +6,7 @@ import TodoListPage from '../pages/ToDo/List/ListPage';
 import TodoUpdatePage from '../pages/ToDo/Update/UpdatePage';
 import TodoCreatePage from '../pages/ToDo/Create/CreatePage';
 import { Toaster } from 'react-hot-toast';
-import Home from '../pages/Home/Home';
+import Home from "../pages/Home/Home";
 import LoginPage from '../pages/Login/GoogleLogin';
 import { useAuth } from '../Hooks/useAuth';
 
