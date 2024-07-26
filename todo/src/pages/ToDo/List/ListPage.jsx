@@ -1,12 +1,12 @@
-import React, {useContext} from 'react';
+import React, { useContext } from "react";
 import { IoMdAdd } from "react-icons/io";
 import ToDoItem from "../../../components/ToDoItem";
-import {useNavigate} from "react-router-dom";
-import { TodoContext } from '../../../context/TodoContext';
+import { useNavigate } from "react-router-dom";
+import { TodoContext } from "../../../context/TodoContext";
 
 const TodoListPage = () => {
-    const navigate = useNavigate();
-    const { state } = useContext(TodoContext);
+  const navigate = useNavigate();
+  const { state } = useContext(TodoContext);
 
     const profile = localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile')) : null;
     const filteredTodos = state?.todos?.filter(todo => todo.userId === profile.id);
@@ -32,6 +32,7 @@ const TodoListPage = () => {
             </ul>
         </div>
     );
+
 };
 
 export default TodoListPage;
