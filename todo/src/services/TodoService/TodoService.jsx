@@ -36,9 +36,9 @@ const TodoService = {
         console.log('Update Todo error', error);
         }
     },
-    async deleteTodoById(userId, id) {
+    async deleteTodoById(id) {
         try {
-        const response = await axios.delete(`${normalUrl}/${id}?userId=${userId}`);
+        const response = await axios.delete(`${normalUrl}/${id}`);
         return response.data;
         } catch (error) {
         console.log('Delete Todo error', error);
