@@ -3,6 +3,7 @@ import { IoMdAdd } from "react-icons/io";
 import ToDoItem from "../../../components/ToDoItem";
 import { useNavigate } from "react-router-dom";
 import { TodoContext } from "../../../context/TodoContext";
+import PieChart from '../../../components/PieChart';
 
 const TodoListPage = () => {
   const navigate = useNavigate();
@@ -30,9 +31,9 @@ const TodoListPage = () => {
                     </li>
                 ))}
             </ul>
-        </div>
-    );
-
-};
+            <h1 className="font-bold text-xl flex justify-center mt-6">Stats for my todos</h1>
+            <PieChart className="mt-10" todos={state.todos}></PieChart>
+        </div>     
+)};
 
 export default TodoListPage;
