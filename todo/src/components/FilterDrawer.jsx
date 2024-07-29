@@ -14,7 +14,7 @@ const FilterDrawer = ({ categories, onClose, selectedCategories, onCategoryChang
                     </button>
                 </div>
                 <div>
-                    <h3 className="text-xl font-semibold mb-2">Category</h3>
+                    <h3 className="text-2xl font-semibold mb-2">Category</h3>
                     <ul>
                         {categories.map((category) => (
                             <li className="pb-2" key={category}>
@@ -23,9 +23,9 @@ const FilterDrawer = ({ categories, onClose, selectedCategories, onCategoryChang
                                         type="checkbox"
                                         checked={selectedCategories.includes(category)}
                                         onChange={() => onCategoryChange(category)}
-                                        className="form-checkbox h-5 w-5 text-blue-600"
+                                        className="h-4 w-4"
                                     />
-                                    <span className="text-gray-800 hover:text-blue-600">{category}</span>
+                                    <span className="text-gray-800 hover:text-blue-600 text-md">{category}</span>
                                 </label>
                             </li>
                         ))}
