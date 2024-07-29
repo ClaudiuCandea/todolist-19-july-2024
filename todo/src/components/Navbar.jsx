@@ -9,22 +9,26 @@ export default function Navbar({
 }) {
   console.log(anchorList);
   return (
-    <div id="nav-wrapper" className={wrapperStyle ? wrapperStyle : ""}>
-      <nav className={navStyle ? navStyle : "flex justify-end p-2 gap-x-2"}>
-        {anchorList &&
-          anchorList.map(({ text, ref, style }, index) => {
-            return (
-              <Link
-                key={index}
-                className={style ? style : "hover:bg-gray-300 rounded-xl p-2"}
-                to={ref}
-              >
-                {text}
-              </Link>
-            );
-          })}
-        {profileComponent}
-      </nav>
-    </div>
+    <nav
+      className={
+        navStyle
+          ? navStyle
+          : " relative flex justify-end p-1 gap-x-3 justify-items-center place-items-center"
+      }
+    >
+      {anchorList &&
+        anchorList.map(({ text, ref, style }, index) => {
+          return (
+            <Link
+              key={index}
+              className={style ? style : "hover:bg-gray-300 rounded-xl p-1"}
+              to={ref}
+            >
+              {text}
+            </Link>
+          );
+        })}
+      {profileComponent}
+    </nav>
   );
 }

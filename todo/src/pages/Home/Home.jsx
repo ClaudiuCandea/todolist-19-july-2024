@@ -29,7 +29,7 @@ function Home() {
 
   return (
     <div id="container" className=" flex flex-col h-screen gap-0">
-      <Navbar anchorList={routes} profileComponent={<Profile />} />
+      <Navbar anchorList={routes} profileComponent={<Profile options={[]} />} />
       {/* {data={localStorage.getItem("profile") - de pus la date dupa ce face merge} */}
       <div id="lottie" className=" justify-end w-auto h-auto p-5 bg-cyan-900">
         <Lottie options={defaultOptions} height={400} width={400} speed={0.4} />
