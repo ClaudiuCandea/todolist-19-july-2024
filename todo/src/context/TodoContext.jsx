@@ -1,5 +1,6 @@
-import React, { createContext, useReducer, useEffect } from "react";
-import TodoService from "../services/TodoService/TodoService";
+import React, { createContext, useReducer, useEffect, useState } from 'react';
+import TodoService from '../services/TodoService/TodoService';
+
 
 export const TodoContext = createContext();
 
@@ -43,26 +44,31 @@ function todoReducer(state, action) {
   }
 }
 
+const getProfileFromLocalStorage = () => {
+  return localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile')) : null;
+};
+
 export function TodoProvider({ children }) {
   const [state, dispatch] = useReducer(todoReducer, initialState);
-
+  const [profile] = useState(getProfileFromLocalStorage());
   useEffect(() => {
     const fetchTodos = async () => {
-      dispatch({ type: ACTIONS.SET_LOADING, payload: true });
-      const todos = await TodoService.getTodos();
-      dispatch({ type: ACTIONS.SET_TODOS, payload: todos });
+      if(profile && profile.id) {
+
+        dispatch({ type: ACTIONS.SET_LOADING, payload: true });
+        const todos = await TodoService.getTodos(profile.id);
+        dispatch({ type: ACTIONS.SET_TODOS, payload: todos });
+      }
     };
 
     fetchTodos();
-  }, []);
+  }, [profile]);
 
   const updateTodoById = async (id, todo) => {
     try {
-      const updatedTodo = await TodoService.updateTodoById(id, todo);
-      dispatch({
-        type: ACTIONS.SET_TODOS,
-        payload: state.todos.map((t) => (t.id === id ? updatedTodo : t)),
-      });
+      const updatedTodo = await TodoService.updateTodoById(profile.id, id, todo);
+      dispatch({ type: ACTIONS.SET_TODOS, payload: state.todos.map(t => (t.id === id ? updatedTodo : t)) });
+
     } catch (error) {
       console.log("Todo update error", error);
     }
@@ -70,7 +76,7 @@ export function TodoProvider({ children }) {
 
   const getTodoById = async (id) => {
     try {
-      const todo = state.todos.reduc((todo) => todo.id === id);
+      const todo = state.todos.find((todo) => todo.id === id);
       return todo;
     } catch (error) {
       console.log("Todo fetch error", error);

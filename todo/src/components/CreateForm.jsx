@@ -1,14 +1,23 @@
-import React from "react";
-import { Formik, Form, Field } from "formik";
-import TodoService from "../services/TodoService/TodoService";
+import React, { useState } from 'react';
+import { Formik, Form, Field } from 'formik';
+import  TodoService  from '../services/TodoService/TodoService';
+import { useNavigate } from 'react-router-dom';
 
-const CreateTodoForm = ({ initialValues }) => {
-  function handleSubmit(values) {
-    values.createdAt = new Date();
-    values.updatedAt = new Date();
-    TodoService.postTodo(values);
-  }
-
+const CreateTodoForm = ({initialValues}) => {
+    const [profile] = useState(() => {
+        const savedProfile = localStorage.getItem('profile');
+        return savedProfile ? JSON.parse(savedProfile) : null;
+    });
+    const navigate = useNavigate();
+    function handleSubmit(values){
+        values.userId = profile.id
+        values.createdAt = new Date()
+        values.updatedAt =  new Date()
+        TodoService.postTodo(values)
+        navigate('/todo')
+        window.location.reload()
+    } 
+    
   return (
     <Formik
       initialValues={initialValues}
