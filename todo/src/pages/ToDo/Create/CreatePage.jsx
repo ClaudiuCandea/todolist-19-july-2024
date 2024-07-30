@@ -6,11 +6,10 @@ const initialValues = {name:'', description:'',category:'',createdAt:'',updatedA
 
 const TodoCreatePage = () => {
   return (
-    <div>
-        <h1 className="font-bold text-4xl flex justify-center">Create to do</h1>
-        <div className="flex justify-center">
-            <CreateTodoForm initialValues={initialValues}></CreateTodoForm>
-        </div>
+    <div className="flex justify-center items-center min-h-screen dark:bg-gray-900 bg-zinc-200 ">
+    <div className="w-full max-w-xl p-5  rounded-lg ">
+        <CreateTodoForm initialValues={initialValues} />
+    </div>
     </div>
   )
 }

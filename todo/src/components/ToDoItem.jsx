@@ -10,11 +10,11 @@ function TodoItem({ todo }) {
   const { deleteTodo } = useContext(TodoContext);
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-6 mb-4 flex flex-col break-words md:flex-1 h-full">
+    <div className="bg-zinc-300 dark:bg-gray-800 text-black dark:text-gray-100 shadow-lg rounded-lg p-6 mb-4 flex flex-col break-words md:flex-1 h-full">
       <div className="flex justify-between items-center mb-4">
         <div>
-          <h3 className="text-xl font-bold">{todo.name}</h3>
-          <p className="text-sm text-gray-600 italic">{todo.category}</p>
+          <h3 className="text-xl font-bold text-gray-600 dark:text-gray-300">{todo.name}</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300 italic">{todo.category}</p>
         </div>
         <div className="flex gap-1">
           <button
@@ -31,8 +31,8 @@ function TodoItem({ todo }) {
           </button>
         </div>
       </div>
-      <p className="text-gray-700 mb-4 flex-grow">{todo.description}</p>
-      <div className="text-sm text-gray-500 flex justify-between">
+      <p className="dark:text-gray-300 text-gray-600 mb-4 flex-grow">{todo.description}</p>
+      <div className="text-sm dark:text-gray-200  text-gray-700 flex justify-between">
         <div className="flex gap-1 items-center">
           <CiCalendar className="text-2xl" />
           <p>{new Date(todo.createdAt).toLocaleDateString()}</p>

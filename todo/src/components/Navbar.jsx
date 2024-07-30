@@ -7,16 +7,15 @@ export default function Navbar({
   anchorList,
   buttons,
 }) {
-  console.log(anchorList);
   return (
     <div id="nav-wrapper" className={wrapperStyle ? wrapperStyle : ""}>
-      <nav className={navStyle ? navStyle : "flex justify-end p-2 gap-x-2"}>
+      <nav className={navStyle ? navStyle : "flex justify-end p-2 gap-x-2 dark:bg-gray-800 bg-zinc-300"}>
         {anchorList &&
           anchorList.map(({ text, ref, style }, index) => {
             return (
               <Link
                 key={index}
-                className={style ? style : "hover:bg-gray-300 rounded-xl p-2"}
+                className={style ? style : "hover:bg-gray-400 dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl p-2 dark:text-white"}
                 to={ref}
               >
                 {text}
@@ -29,7 +28,7 @@ export default function Navbar({
               <button
                 key={index}
                 onClick={handleClick}
-                className={style ? style : "hover:bg-gray-300 rounded-xl p-2"}
+                className={style ? style : "hover:bg-gray-300 rounded-xl p-2 "}
               >
                 {text}
               </button>

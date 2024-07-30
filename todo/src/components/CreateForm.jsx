@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import { Formik, Form, Field } from 'formik';
 import  TodoService  from '../services/TodoService/TodoService';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 const CreateTodoForm = ({initialValues}) => {
-    const [profile] = useState(() => {
-        const savedProfile = localStorage.getItem('profile');
-        return savedProfile ? JSON.parse(savedProfile) : null;
-    });
+    const { profile } = useAuth();
     const navigate = useNavigate();
     function handleSubmit(values){
         values.userId = profile.id
@@ -17,57 +15,52 @@ const CreateTodoForm = ({initialValues}) => {
         navigate('/todo')
         window.location.reload()
     } 
-    
+    const attributes = useMemo(
+      () => [
+          { name: "name", label: "Name" },
+          { name: "description", label: "Description" },
+          { name: "category", label: "Category" },
+      ],
+      []
+  );
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={async (values) => handleSubmit(values)}
-    >
-      <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <lable
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="name"
+    <div className="flex justify-center items-center h-screen dark:bg-gray-900">
+      <div className="w-full max-w-xl p-5 dark:bg-gray-800 bg-zinc-300 rounded-lg shadow">
+        <h2 className="text-2xl font-bold mb-6 dark:text-white text-black">
+          Create Todo
+        </h2>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={async (values) => handleSubmit(values)}
         >
-          Name
-        </lable>
-        <Field
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          name="name"
-          type="text"
-        ></Field>
-
-        <lable
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="description"
-        >
-          Description
-        </lable>
-        <Field
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          name="description"
-          type="text"
-        ></Field>
-
-        <lable
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="category"
-        >
-          Category
-        </lable>
-        <Field
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          name="category"
-          type="text"
-        ></Field>
-
-        <button
-          className="align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-          type="submit"
-        >
-          Create
-        </button>
-      </Form>
-    </Formik>
+          <Form className="space-y-4">
+            {attributes.map((attr) => (
+              <div key={attr.name} className="mb-4 flex flex-col">
+                <label
+                  className="block text-black dark:text-gray-300 text-base font-bold mb-2"
+                  htmlFor={attr.name}
+                >
+                  {attr.label}
+                </label>
+                <Field
+                  className="pl-3 dark:border-gray-300 h-10 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm dark:bg-gray-700 dark:text-white"
+                  name={attr.name}
+                  type="text"
+                />
+              </div>
+            ))}
+            <div className="flex justify-center mt-4">
+              <button
+                className="align-baseline font-bold text-base text-blue-500 hover:text-blue-800 px-4 py-2 bg-blue-500 text-white rounded-md"
+                type="submit"
+              >
+                Create
+              </button>
+            </div>
+          </Form>
+        </Formik>
+      </div>
+    </div>
   );
 };
 
