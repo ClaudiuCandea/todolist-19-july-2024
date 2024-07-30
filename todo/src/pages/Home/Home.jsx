@@ -9,7 +9,7 @@ import { routesCfg } from "../../routes/routes";
 function Home() {
   const routes = useMemo(() => {
     return routesCfg;
-  }, [routesCfg]);
+  }, []);
 
   const defaultOptions = useMemo(() => {
     return {
@@ -28,7 +28,20 @@ function Home() {
 
   return (
     <div id="container" className=" flex flex-col h-screen gap-0">
-      <Navbar anchorList={routes} />
+      <Navbar
+        anchorList={routes}
+        buttons={[
+          {
+            text: "LogOut",
+            handleClick: () => {
+              localStorage.removeItem("isAuthenticated");
+              localStorage.removeItem("profile");
+              window.location.reload();
+            },
+            style: "hover:bg-red-300 bg-red-600 rounded-xl p-2",
+          },
+        ]}
+      />
       <div id="lottie" className=" justify-end w-auto h-auto p-5 bg-cyan-900">
         <Lottie options={defaultOptions} height={400} width={400} speed={0.4} />
       </div>

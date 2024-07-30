@@ -1,17 +1,26 @@
 import React, {useContext, useState} from 'react';
-import {IoMdAdd, IoMdMenu} from "react-icons/io";
+import { IoMdAdd, IoMdMenu } from "react-icons/io";
 import ToDoItem from "../../../components/ToDoItem";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TodoContext } from '../../../context/TodoContext';
+import PieChart from '../../../components/PieChart';
 import FilterDrawer from "../../../components/FilterDrawer";
+
 
 const TodoListPage = () => {
     const navigate = useNavigate();
     const { state } = useContext(TodoContext);
+    const profile = localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile')) : null;
     const [isDrawerOpen, setDrawerOpen] = useState(false);
-    const categories = Array.from(new Set(state.todos.map(todo => todo.category)));
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [searchInput, setSearchInput] = useState('');
+    const userTodos = state?.todos?.filter(todo => todo.userId === profile.id);
+    const categories = Array.from(new Set(userTodos.map(todo => todo.category)));
+    const filteredTodos = userTodos.filter(todo => {
+        const filterMatch = selectedCategories.length === 0 || selectedCategories.includes(todo.category);
+        const  searchMatch = todo.name.toLowerCase().includes(searchInput.toLowerCase());
+        return filterMatch && searchMatch;
+    });
 
     const handleCategoryChange = (category) => {
         if (selectedCategories.includes(category)) {
@@ -21,11 +30,6 @@ const TodoListPage = () => {
         }
     };
 
-    const filteredTodos = state.todos.filter(todo => {
-        const filterMatch = selectedCategories.length === 0 || selectedCategories.includes(todo.category);
-        const  searchMatch = todo.name.toLowerCase().includes(searchInput.toLowerCase());
-        return filterMatch && searchMatch;
-    });
 
     return (
         <div className="flex bg-gray-50 min-h-screen">
@@ -82,7 +86,6 @@ const TodoListPage = () => {
                     </div>
                 </div>
 
-                {/*ToDo List*/}
                 <ul className="todo-list grid grid-cols-1 xl:grid-cols-2 gap-4">
                     {filteredTodos.map((todo) => (
                         <li className="todo-item md:flex" key={todo.id}>
@@ -90,6 +93,8 @@ const TodoListPage = () => {
                         </li>
                     ))}
                 </ul>
+                <h1 className="font-bold text-xl flex justify-center mt-6">Stats for my todos</h1>
+                <PieChart className="mt-10" todos={filteredTodos}></PieChart>
             </div>
 
             {isDrawerOpen && (
