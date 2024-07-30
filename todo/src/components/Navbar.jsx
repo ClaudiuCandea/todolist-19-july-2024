@@ -7,7 +7,6 @@ export default function Navbar({
   anchorList,
   profileComponent,
 }) {
-  console.log(anchorList);
   return (
     <nav
       className={

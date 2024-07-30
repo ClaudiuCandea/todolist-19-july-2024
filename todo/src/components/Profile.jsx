@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { CiLogout } from "react-icons/ci";
-
-import user from "../user.png";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 export default function Profile({ picture, name, mail }) {
   const [isClicked, setIsClicked] = useState(false);
@@ -11,10 +10,10 @@ export default function Profile({ picture, name, mail }) {
   return (
     <div
       id="wrap-component"
-      className=" relative flex flex-row bg-pink-500 rounded-full gap-x-3 p-1 place-items-center"
+      className=" relative flex flex-row bg-gray-200 rounded-full gap-x-3 p-1 place-items-center"
     >
       <img
-        src={user}
+        src={picture ? picture : ""}
         alt="Profile picture"
         className="bg-red-600 rounded-full w-9 h-9"
       ></img>
@@ -29,34 +28,35 @@ export default function Profile({ picture, name, mail }) {
       >
         <RiArrowDropDownLine size={24} />
       </button>
+
       {isClicked && (
-        <div className="absolute right-0 top-full mt-2 w-full bg-white rounded-md p-2">
-          <div id="details" className=" flex flex-col place-items-center">
+        <div className="absolute right-0 top-full mt-2 bg-white rounded-md p-3 flex flex-col place-items-center gap-y-1">
+          <div className="flex flex-row">
             <img
-              src={user}
+              src={picture ? picture : ""}
               alt="Profile picture"
-              className="bg-red-600 rounded-full w-20 h-20"
+              className="bg-red-600 rounded-full w-24 h-24"
             ></img>
-            <text className="p-1">{name ? name : "Placeholder name"}</text>
+            <div className="flex flex-col overflow-hidden">
+              <text className="p-1">{name ? name : "Placeholder name"}</text>
 
-            <text className="p-1">{mail ? mail : "Placeholder mail"}</text>
+              <text className="p-1 hover:animate-rightToLeft">
+                {mail ? mail : "Placeholder mail"}
+              </text>
+            </div>
           </div>
 
-          <div
-            id="options"
-            className="border-1 border-black border-solid flex justify-evenly  "
+          <button className=" flex place-items-center justify-center bg-gray-100 rounded-md p-2 gap-2 w-full">
+            <CiLogout size={32} /> <p>Deconectează-te</p>
+          </button>
+
+          <button
+            className=" flex place-items-center justify-center bg-gray-100 rounded-md p-2 gap-2 w-full"
+            onClick={() => setDarkmodeMok(!darkmodeMok)}
           >
-            <button className=" bg-gray-300 rounded-md p-2">
-              {" "}
-              <CiLogout color="red" size={32} />
-            </button>
-            <button
-              className=" bg-gray-300 rounded-md p-2"
-              onClick={() => setDarkmodeMok(!darkmodeMok)}
-            >
-              Style: {darkmodeMok ? " dark" : " light"}
-            </button>
-          </div>
+            Style:{" "}
+            {darkmodeMok ? <MdDarkMode size={24} /> : <MdLightMode size={24} />}
+          </button>
         </div>
       )}
     </div>
