@@ -63,7 +63,7 @@ const TodoListPage = () => {
                             onChange={(e) => setSearchInput(e.target.value)}
                             className="border rounded px-4 py-2 w-full sm:max-w-md"
                         />
-                        <div className="flex gap-2 justify-between w-full sm:w-auto sm:justify-end">
+                        <div className="flex gap-3 justify-between w-full sm:w-auto sm:justify-end">
                             <button
                                 onClick={() => navigate(`/todo/create`)}
                                 className="text-white font-bold bg-blue-500 transition duration-200 hover:bg-blue-300 px-4 py-2 rounded flex items-center"
