@@ -24,11 +24,7 @@ function TodoItem({ todo }) {
               onClick={() => {
                 updateTodoById(todo.id, { ...todo, favorite: !todo.favorite });
               }}
-              className={
-                todo.favorite
-                  ? "bg-gray-100 px-3 py-1 rounded hover:bg-black transition duration-200"
-                  : "bg-gray-100 px-3 py-1 rounded hover:bg-yellow-300 transition duration-200"
-              }
+              className="bg-gray-100 px-3 py-1 rounded transition duration-200"
             >
               <MdStar
                 className="text-2xl"
