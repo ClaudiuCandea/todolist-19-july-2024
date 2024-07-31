@@ -1,7 +1,7 @@
 import React from 'react';
 import { IoMdClose } from "react-icons/io";
 
-const FilterDrawer = ({ categories, onClose, selectedCategories, onCategoryChange }) => {
+const FilterDrawer = ({ title, options, selectedOptions, onClose, onOptionChange }) => {
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-end z-50">
             <div className="w-3/4 bg-white p-6 shadow-md">
@@ -14,18 +14,18 @@ const FilterDrawer = ({ categories, onClose, selectedCategories, onCategoryChang
                     </button>
                 </div>
                 <div>
-                    <h3 className="text-2xl font-semibold mb-2">Category</h3>
+                    <h3 className="text-2xl font-semibold mb-2">{title}</h3>
                     <ul>
-                        {categories.map((category) => (
-                            <li className="pb-2" key={category}>
+                        {options.map((option) => (
+                            <li className="pb-2" key={option}>
                                 <label className="flex items-center space-x-2 cursor-pointer">
                                     <input
                                         type="checkbox"
-                                        checked={selectedCategories.includes(category)}
-                                        onChange={() => onCategoryChange(category)}
+                                        checked={selectedOptions.includes(option)}
+                                        onChange={() => onOptionChange(option)}
                                         className="h-4 w-4"
                                     />
-                                    <span className="text-gray-800 hover:text-blue-600 text-md">{category}</span>
+                                    <span className="text-gray-800 hover:text-blue-600 text-md">{option}</span>
                                 </label>
                             </li>
                         ))}

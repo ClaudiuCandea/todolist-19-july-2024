@@ -6,6 +6,7 @@ import { TodoContext } from '../../../context/TodoContext';
 import PieChart from '../../../components/PieChart';
 import FilterDrawer from "../../../components/FilterDrawer";
 import Pagination from "../../../components/Pagination";
+import ToDoFilter from "../../../components/ToDoFilter";
 
 const TodoListPage = () => {
     const navigate = useNavigate();
@@ -18,9 +19,9 @@ const TodoListPage = () => {
     const categories = Array.from(new Set(userTodos.map(todo => todo.category)));
 
     const filteredTodos = userTodos.filter(todo => {
-        const filterMatch = selectedCategories.length === 0 || selectedCategories.includes(todo.category);
+        const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(todo.category);
         const  searchMatch = todo.name.toLowerCase().includes(searchInput.toLowerCase());
-        return filterMatch && searchMatch;
+        return categoryMatch && searchMatch;
     });
 
     const handleCategoryChange = (category) => {
@@ -50,26 +51,15 @@ const TodoListPage = () => {
     return (
         <div className="flex bg-gray-50 min-h-screen">
             <div className="hidden sm:flex flex-col w-64 py-6 px-2">
-                <div className="flex flex-col flex-1 overflow-y-auto">
-                    <div className="px-6 border-2 shadow-md rounded-md bg-white">
-                        <h3 className="text-xl ml-1 font-semibold mb-2">Category</h3>
-                        <ul className="px-2">
-                            {categories.map((category) => (
-                                <li className="pb-2" key={category}>
-                                    <label className="flex items-center space-x-2 cursor-pointer">
-                                        <input
-                                            type="checkbox"
-                                            checked={selectedCategories.includes(category)}
-                                            onChange={() => handleCategoryChange(category)}
-                                            className="h-4 w-4"
-                                        />
-                                        <span className="text-gray-800 hover:text-blue-600 text-sm">{category}</span>
-                                    </label>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                <div className="flex flex-col flex-1 gap-1 overflow-y-auto">
+                    <ToDoFilter
+                        title="Category"
+                        options={categories}
+                        selectedOptions={selectedCategories}
+                        onOptionChange={handleCategoryChange}
+                    />
                 </div>
+
             </div>
 
             <div className="container mx-auto p-6">
@@ -125,9 +115,10 @@ const TodoListPage = () => {
 
             {isDrawerOpen && (
                 <FilterDrawer
-                    categories={categories}
-                    selectedCategories={selectedCategories}
-                    onCategoryChange={handleCategoryChange}
+                    title={"Category"}
+                    options={categories}
+                    selectedOptions={selectedCategories}
+                    onOptionChange={handleCategoryChange}
                     onClose={() => setDrawerOpen(false)}
                 />
             )}
