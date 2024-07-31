@@ -3,3 +3,9 @@ export const routesCfg = [
   { text: "Todo", ref: "/todo", style: "" },
   { text: "Create", ref: "/todo/create", style: "" },
 ];
+
+export const routes = {
+  home: "/home",
+  todo: "/todo",
+  todoCreate: "/todo/create",
+}

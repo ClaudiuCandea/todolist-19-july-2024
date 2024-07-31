@@ -30,13 +30,13 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage, todosPerPage, set
     const endItem = Math.min(currentPage * todosPerPage, totalItems);
 
     return (
-        <div className="flex flex-col gap-2 sm:flex-row sm:justify-between items-center mt-5">
+        <div className="flex flex-col gap-2 sm:flex-row sm:justify-between items-center mt-6 dark:text-gray-200">
             <div className="flex items-center">
                 <span>Items per page</span>
                 <select
                     value={todosPerPage}
                     onChange={(e) => setTodosPerPage(Number(e.target.value))}
-                    className="border rounded px-2 py-1 ml-2"
+                    className="border rounded px-2 py-1 ml-2 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200"
                 >
                     <option value={5}>5</option>
                     <option value={10}>10</option>
@@ -49,14 +49,18 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage, todosPerPage, set
             </div>
             <div className="flex items-center gap-3">
                 <div>
-                    <button onClick={handleFirstPage}
-                            className="px-2 py-1 border rounded-l bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-300 disabled:text-gray-500 disabled:opacity-50"
-                            disabled={currentPage === 1}>
+                    <button
+                        onClick={handleFirstPage}
+                        className="px-2 py-1 border rounded-l bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 dark:border-gray-700 disabled:bg-gray-300 disabled:text-gray-500 disabled:opacity-50 dark:disabled:bg-gray-800"
+                        disabled={currentPage === 1}
+                    >
                         &laquo;
                     </button>
-                    <button onClick={handlePreviousPage}
-                            className="px-2 py-1 border w-20 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-300 disabled:text-gray-500 disabled:opacity-50"
-                            disabled={currentPage === 1}>
+                    <button
+                        onClick={handlePreviousPage}
+                        className="px-2 py-1 border w-20 bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 dark:border-gray-700 disabled:bg-gray-300 disabled:text-gray-500 disabled:opacity-50 dark:disabled:bg-gray-800"
+                        disabled={currentPage === 1}
+                    >
                         Previous
                     </button>
                 </div>
@@ -65,19 +69,23 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage, todosPerPage, set
                         type="number"
                         value={currentPage}
                         onChange={handlePageChange}
-                        className="w-12 text-center border"
+                        className="w-12 text-center border dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200"
                     />
                     <span>of {totalPages}</span>
                 </div>
                 <div>
-                    <button onClick={handleNextPage}
-                            className="px-2 py-1 border w-20 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-300 disabled:text-gray-500 disabled:opacity-50"
-                            disabled={currentPage === totalPages}>
+                    <button
+                        onClick={handleNextPage}
+                        className="px-2 py-1 border w-20 bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 dark:border-gray-700 disabled:bg-gray-300 disabled:text-gray-500 disabled:opacity-50 dark:disabled:bg-gray-800"
+                        disabled={currentPage === totalPages}
+                    >
                         Next
                     </button>
-                    <button onClick={handleLastPage}
-                            className="px-2 py-1 border rounded-r bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-300 disabled:text-gray-500 disabled:opacity-50"
-                            disabled={currentPage === totalPages}>
+                    <button
+                        onClick={handleLastPage}
+                        className="px-2 py-1 border rounded-r bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 dark:border-gray-700 disabled:bg-gray-300 disabled:text-gray-500 disabled:opacity-50 dark:disabled:bg-gray-800"
+                        disabled={currentPage === totalPages}
+                    >
                         &raquo;
                     </button>
                 </div>
