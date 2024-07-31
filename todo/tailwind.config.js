@@ -3,7 +3,25 @@ module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        rightToLeft: {
+          "0%": { transform: "translateX(0%)" },
+          "25%": { transform: "translateX(-25%)" },
+          "50%": { transform: "translateX(-50%)" },
+          "75%": { transform: "translateX(-75%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+      },
+      animation: {
+        rightToLeft: "rightToLeft 5s linear infinite",
+      },
+    },
+  },
+  variants: {
+    extend: {
+      animation: ["hover"],
+    },
   },
   variants: {
     extend: {},

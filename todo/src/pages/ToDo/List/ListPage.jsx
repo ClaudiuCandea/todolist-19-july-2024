@@ -4,6 +4,7 @@ import ToDoItem from "../../../components/ToDoItem";
 import { useNavigate } from "react-router-dom";
 import { TodoContext } from "../../../context/TodoContext";
 import { useAuth } from "../../../hooks/useAuth";
+import PieChart from '../../../components/PieChart';
 
 const TodoListPage = () => {
   const navigate = useNavigate();
@@ -33,9 +34,9 @@ const TodoListPage = () => {
                     ))}
                 </ul>
             </div>
-        </div>
-    );
-
-};
+            <h1 className="font-bold text-xl flex justify-center mt-6 dark:text-white dark:bg-gray-500">Stats for my todos</h1>
+            <PieChart className="mt-10" todos={filteredTodos}></PieChart>
+        </div>     
+)};
 
 export default TodoListPage;
