@@ -12,7 +12,7 @@ const TodoUpdateSchema = Yup.object().shape({
         .required("Required"),
     description: Yup.string()
         .min(2, "Too Short!")
-        .max(50, "Too Long!")
+        .max(500, "Too Long!")
         .required("Required"),
     category: Yup.string()
         .min(2, "Too Short!")
@@ -32,7 +32,6 @@ const TodoUpdatePage = () => {
 
     useEffect(() => {
         const userId = profile?.id
-        console.log(userId)
         const fetchTodo = async () => {
             setIsLoading(true);
             try {
@@ -51,7 +50,7 @@ const TodoUpdatePage = () => {
         };
 
         fetchTodo();
-    }, [id, getTodoById, navigate]);
+    }, [id, getTodoById, navigate, profile]);
 
     const handleSubmit = async (values) => {
         try {

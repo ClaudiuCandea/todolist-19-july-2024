@@ -1,17 +1,11 @@
 import React, { useMemo } from "react";
 import Lottie from "react-lottie";
 import tree from "../../utilitare/tree.json";
-import Navbar from "../../components/Navbar";
 import { toast } from "react-hot-toast";
 import { useQuote } from "../../utilitare/hooks";
-import { routesCfg } from "../../routes/routes";
 import { ReactComponent as Loading } from "../../utilitare/loading.svg";
 
 function Home() {
-  const routes = useMemo(() => {
-    return routesCfg;
-  }, []);
-
   const defaultOptions = useMemo(() => {
     return {
       animationData: tree,
@@ -29,20 +23,6 @@ function Home() {
 
   return (
     <div id="container" className=" flex flex-col h-screen gap-0">
-      <Navbar
-        anchorList={routes}
-        buttons={[
-          {
-            text: "LogOut",
-            handleClick: () => {
-              localStorage.removeItem("isAuthenticated");
-              localStorage.removeItem("profile");
-              window.location.reload();
-            },
-            style: "hover:bg-red-300 bg-red-600 rounded-xl p-2 dark:text-white",
-          },
-        ]}
-      />
       <div id="lottie" className=" justify-end w-auto h-auto p-5 dark:bg-gray-900 bg-cyan-800">
         <Lottie options={defaultOptions} height={400} width={400} speed={0.4} />
       </div>

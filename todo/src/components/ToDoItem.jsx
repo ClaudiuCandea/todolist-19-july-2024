@@ -1,20 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { CiCalendar } from "react-icons/ci";
 import { GrUpdate } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 import { TodoContext } from "../context/TodoContext";
+import TodoModal from "./TodoModal";
 
 function TodoItem({ todo }) {
   const navigate = useNavigate();
   const { deleteTodo } = useContext(TodoContext);
+  const imageURL = process.env.REACT_APP_IMAGE_GENERATOR_URL + todo.id
+
+  const [showFullDescription] = useState(false);
+
+  const MAX_DESCRIPTION_LENGTH = 30; 
+
+  const truncatedDescription = todo.description.substring(0, MAX_DESCRIPTION_LENGTH);
+
 
   return (
-    <div className="bg-zinc-300 dark:bg-gray-800 text-black dark:text-gray-100 shadow-lg rounded-lg p-6 mb-4 flex flex-col break-words md:flex-1 h-full">
+    <div className="bg-zinc-300 dark:bg-gray-800 text-black dark:text-gray-100 shadow-lg rounded-lg p-6 mb-4 flex flex-row break-words md:flex-1 h-full">
+      <img alt='robots' src={imageURL} width="150" height="150" />
+      <div className="flex flex-col break-words md:flex-1 h-full">
+
       <div className="flex justify-between items-center mb-4">
         <div>
-          <h3 className="text-xl font-bold text-gray-600 dark:text-gray-300">{todo.name}</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300 italic">{todo.category}</p>
+          <h3 className="text-xl font-bold text-gray-600 dark:text-gray-300 max-w-[300px]">{todo.name}</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300 italic text-ellipsis max-w-[300px]">{todo.category}</p>
         </div>
         <div className="flex gap-1">
           <button
@@ -31,7 +43,16 @@ function TodoItem({ todo }) {
           </button>
         </div>
       </div>
-      <p className="dark:text-gray-300 text-gray-600 mb-4 flex-grow">{todo.description}</p>
+      <p
+          className={`dark:text-gray-300 text-gray-600 mb-4 flex-grow max-w-[300px] ${
+            showFullDescription ? "text-ellipsis" : ""
+          }`}
+        >
+          {truncatedDescription}
+          {todo.description.length > MAX_DESCRIPTION_LENGTH && (
+            <TodoModal todo={todo}/>
+          )}
+        </p>
       <div className="text-sm dark:text-gray-200  text-gray-700 flex justify-between">
         <div className="flex gap-1 items-center">
           <CiCalendar className="text-2xl" />
@@ -44,6 +65,7 @@ function TodoItem({ todo }) {
               <p>{new Date(todo.updatedAt).toLocaleDateString()}</p>
             </>
           )}
+        </div>
         </div>
       </div>
     </div>
