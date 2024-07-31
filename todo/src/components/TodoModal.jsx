@@ -9,22 +9,18 @@ function TodoModal({ todo }) {
 
   return (
     <>
-      {/* Button to open the modal */}
       <button onClick={() => setIsOpen(true)} className="">
         See More
       </button>
 
-      {/* Modal overlay */}
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="bg-white w-11/12 max-w-lg rounded-lg overflow-hidden shadow-lg">
-            {/* Modal content */}
             <div className="p-6">
               <h2 className="text-2xl font-bold mb-2">
                 {todo.name}
               </h2>
               <p className="text-gray-700">{todo.description}</p>
-              {/* ... other details */}
               <button onClick={handleClose} className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded">
                 Close
               </button>
