@@ -1,11 +1,11 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { IoMdAdd, IoMdMenu } from "react-icons/io";
 import ToDoItem from "../../../components/ToDoItem";
 import { useNavigate } from "react-router-dom";
 import { TodoContext } from '../../../context/TodoContext';
 import PieChart from '../../../components/PieChart';
 import FilterDrawer from "../../../components/FilterDrawer";
-
+import Pagination from "../../../components/Pagination";
 
 const TodoListPage = () => {
     const navigate = useNavigate();
@@ -16,6 +16,7 @@ const TodoListPage = () => {
     const [searchInput, setSearchInput] = useState('');
     const userTodos = state?.todos?.filter(todo => todo.userId === profile.id);
     const categories = Array.from(new Set(userTodos.map(todo => todo.category)));
+
     const filteredTodos = userTodos.filter(todo => {
         const filterMatch = selectedCategories.length === 0 || selectedCategories.includes(todo.category);
         const  searchMatch = todo.name.toLowerCase().includes(searchInput.toLowerCase());
@@ -29,6 +30,21 @@ const TodoListPage = () => {
             setSelectedCategories([...selectedCategories, category]);
         }
     };
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [todosPerPage, setTodosPerPage] = useState(5);
+
+    const paginate = (todos, pageNumber, todosPerPage) => {
+        const startIndex = (pageNumber - 1) * todosPerPage;
+        return todos.slice(startIndex, startIndex + todosPerPage);
+    };
+
+    const paginatedTodos = paginate(filteredTodos, currentPage, todosPerPage);
+    const totalPages = Math.ceil(filteredTodos.length / todosPerPage);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedCategories, searchInput, todosPerPage]);
 
 
     return (
@@ -87,12 +103,22 @@ const TodoListPage = () => {
                 </div>
 
                 <ul className="todo-list grid grid-cols-1 xl:grid-cols-2 gap-4">
-                    {filteredTodos.map((todo) => (
+                    {paginatedTodos.map((todo) => (
                         <li className="todo-item md:flex" key={todo.id}>
                             <ToDoItem todo={todo}/>
                         </li>
                     ))}
                 </ul>
+
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    setCurrentPage={setCurrentPage}
+                    todosPerPage={todosPerPage}
+                    setTodosPerPage={setTodosPerPage}
+                    totalItems={filteredTodos.length}
+                />
+
                 <h1 className="font-bold text-xl flex justify-center mt-6">Stats for my todos</h1>
                 <PieChart className="mt-10" todos={filteredTodos}></PieChart>
             </div>
