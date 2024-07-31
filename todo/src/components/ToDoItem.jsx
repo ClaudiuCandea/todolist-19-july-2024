@@ -1,14 +1,12 @@
 import React, { useContext, useState } from "react";
-import { MdDelete, MdEdit } from "react-icons/md";
 import { CiCalendar } from "react-icons/ci";
 import { GrUpdate } from "react-icons/gr";
-import { useNavigate } from "react-router-dom";
 import { TodoContext } from "../context/TodoContext";
 import TodoModal from "./TodoModal";
+import ToDoMenu from "./ToDoMenu";
 
 
 function TodoItem({ todo }) {
-  const navigate = useNavigate();
   const { deleteTodo } = useContext(TodoContext);
   const imageURL = process.env.REACT_APP_IMAGE_GENERATOR_URL + todo.id
 
@@ -29,20 +27,7 @@ function TodoItem({ todo }) {
           <h3 className="text-xl font-bold text-gray-600 dark:text-gray-300 max-w-[300px]">{todo.name}</h3>
           <p className="text-sm text-gray-600 dark:text-gray-300 italic text-ellipsis max-w-[300px]">{todo.category}</p>
         </div>
-        <div className="flex gap-1">
-          <button
-            onClick={() => navigate(`/todo/${todo.id}`)}
-            className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition duration-200"
-          >
-            <MdEdit className="text-2xl" />
-          </button>
-          <button
-            className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition duration-200"
-            onClick={() => deleteTodo(todo.id)}
-          >
-            <MdDelete className="text-2xl" />
-          </button>
-        </div>
+          <ToDoMenu id={todo.id} deleteTodo={deleteTodo}/>
       </div>
       <p
           className={`dark:text-gray-300 text-gray-600 mb-4 flex-grow max-w-[300px] ${
