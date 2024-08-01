@@ -5,14 +5,28 @@ import { GrUpdate } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 import { TodoContext } from "../context/TodoContext";
 
-function TodoItem({ todo }) {
+function TodoItem({ todo, isPublic }) {
   const navigate = useNavigate();
   const { deleteTodo, updateTodoById } = useContext(TodoContext);
   const imageURL = process.env.REACT_APP_IMAGE_GENERATOR_URL + todo.id;
 
   return (
     <div className="bg-white shadow-md rounded-lg p-6 mb-4 flex flex-row break-words md:flex-1 h-full">
-      <img alt="robots" src={imageURL} width="150" height="150" />
+      <div className=" flex flex-col w-1/3 gap-2">
+        <img alt="robots" src={imageURL} />
+
+        {isPublic ? (
+          <div className="flex flex-row overflow-hidden place-items-center gap-2 ">
+            ID:
+            <div className=" overflow-clip">
+              <div className="hover:animate-rightToLeft text-clip ">
+                {todo.userId}
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </div>
+
       <div className="flex flex-col break-words md:flex-1 h-full">
         <div className="flex justify-between items-center mb-4">
           <div>

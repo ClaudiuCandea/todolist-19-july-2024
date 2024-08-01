@@ -6,16 +6,10 @@ import { TodoContext } from "../../../context/TodoContext";
 import PieChart from "../../../components/PieChart";
 import { exportToExcel } from "../../../utils/exportModule";
 
-const TodoListPage = () => {
+const PublicTodoListPage = () => {
   const navigate = useNavigate();
   const { state } = useContext(TodoContext);
-
-  const profile = localStorage.getItem("profile")
-    ? JSON.parse(localStorage.getItem("profile"))
-    : null;
-  const filteredTodos = state?.todos?.filter(
-    (todo) => todo.userId === profile.id
-  );
+  const todos = state?.todos;
 
   return (
     <div className="container mx-auto p-6">
@@ -30,9 +24,7 @@ const TodoListPage = () => {
             Add Task
           </button>
           <button
-            onClick={() =>
-              exportToExcel(filteredTodos, profile.name + "' Todo")
-            }
+            onClick={() => exportToExcel(todos, "Todo")}
             className="text-white font-bold bg-blue-500 transition duration-200 hover:bg-blue-300 px-4 py-2 rounded flex items-center"
           >
             <IoMdDownload className="text-xl" />
@@ -42,18 +34,18 @@ const TodoListPage = () => {
       </div>
 
       <ul className="todo-list grid grid-cols-1 xl:grid-cols-2 gap-4">
-        {filteredTodos.map((todo) => (
+        {todos.map((todo) => (
           <li className="todo-item md:flex" key={todo.id}>
-            <ToDoItem todo={todo} />
+            <ToDoItem todo={todo} isPublic={true} />
           </li>
         ))}
       </ul>
       <h1 className="font-bold text-xl flex justify-center mt-6">
         Stats for my todos
       </h1>
-      <PieChart className="mt-10" todos={filteredTodos}></PieChart>
+      <PieChart className="mt-10" todos={todos}></PieChart>
     </div>
   );
 };
 
-export default TodoListPage;
+export default PublicTodoListPage;
