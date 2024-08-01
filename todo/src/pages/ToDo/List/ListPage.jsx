@@ -17,9 +17,8 @@ const TodoListPage = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const userTodos = state?.todos?.filter(
-    (todo) => todo.userId === user.profile.id
-  );
+
+  const userTodos = state?.todos;
   const categories = Array.from(
     new Set(userTodos.map((todo) => todo.category))
   );
@@ -113,7 +112,7 @@ const TodoListPage = () => {
           <ul className="todo-list grid grid-cols-1 xl:grid-cols-2 gap-4">
             {paginatedTodos.map((todo) => (
               <li className="todo-item md:flex" key={todo.id}>
-                <ToDoItem todo={todo} />
+                <ToDoItem todo={todo} isPublic={false} isOwner={true} />
               </li>
             ))}
           </ul>

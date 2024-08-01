@@ -5,7 +5,6 @@ import { GrUpdate } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 import { TodoContext } from "../context/TodoContext";
 import TodoModal from "./TodoModal";
-import ToDoMenu from "./ToDoMenu";
 
 function TodoItem({ todo, isPublic, isOwner }) {
   const navigate = useNavigate();
@@ -48,34 +47,39 @@ function TodoItem({ todo, isPublic, isOwner }) {
               {todo.category}
             </p>
           </div>
-          <div className="flex gap-1">
-            <button
-              onClick={() => {
-                updateTodoById(todo.id, { ...todo, favorite: !todo.favorite });
-              }}
-              className="bg-gray-100 px-3 py-1 rounded transition duration-200"
-            >
-              <MdStar
-                className="text-2xl"
-                color={todo.favorite ? "orange" : "black"}
-              />
-            </button>
-            <button
-              onClick={() => navigate(`/todo/${todo.id}`)}
-              className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition duration-200"
-            >
-              <MdEdit className="text-2xl" />
-            </button>
-            <button
-              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition duration-200"
-              onClick={async () => {
-                await deleteTodo(todo.id);
-                window.location.reload();
-              }}
-            >
-              <MdDelete className="text-2xl" />
-            </button>
-          </div>
+          {isOwner ? (
+            <div className="flex gap-1">
+              <button
+                onClick={() => {
+                  updateTodoById(todo.id, {
+                    ...todo,
+                    favorite: !todo.favorite,
+                  });
+                }}
+                className="bg-gray-100 px-3 py-1 rounded transition duration-200"
+              >
+                <MdStar
+                  className="text-2xl"
+                  color={todo.favorite ? "orange" : "black"}
+                />
+              </button>
+              <button
+                onClick={() => navigate(`/todo/${todo.id}`)}
+                className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition duration-200"
+              >
+                <MdEdit className="text-2xl" />
+              </button>
+              <button
+                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition duration-200"
+                onClick={async () => {
+                  await deleteTodo(todo.id);
+                  window.location.reload();
+                }}
+              >
+                <MdDelete className="text-2xl" />
+              </button>
+            </div>
+          ) : null}
         </div>
         <p
           className={`dark:text-gray-300 text-gray-600 mb-4 flex-grow max-w-[300px] ${
