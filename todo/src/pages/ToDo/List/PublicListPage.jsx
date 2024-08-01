@@ -41,7 +41,7 @@ const PublicTodoListPage = () => {
           </li>
         ))}
       </ul>
-      <h1 className="font-bold text-xl flex justify-center mt-6">
+      <h1 className="font-bold text-xl flex justify-center mt-6 dark:text-white">
         Stats for my todos
       </h1>
       <PieChart className="mt-10" todos={todos}></PieChart>
