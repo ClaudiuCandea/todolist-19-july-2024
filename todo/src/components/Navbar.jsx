@@ -20,7 +20,11 @@ export default function Navbar({
           return (
             <Link
               key={index}
-              className={style ? style : "hover:bg-gray-400 dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl p-1 dark:text-white"}
+              className={
+                style
+                  ? style
+                  : "hover:bg-gray-400 dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl p-1 dark:text-white"
+              }
               to={ref}
             >
               {text}

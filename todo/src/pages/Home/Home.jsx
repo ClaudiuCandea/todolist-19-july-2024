@@ -23,7 +23,10 @@ function Home() {
 
   return (
     <div id="container" className=" flex flex-col h-screen gap-0">
-      <div id="lottie" className=" justify-end w-auto h-auto p-5 dark:bg-gray-900 bg-cyan-800">
+      <div
+        id="lottie"
+        className=" justify-end w-auto h-auto p-5 dark:bg-gray-900 bg-cyan-800"
+      >
         <Lottie options={defaultOptions} height={400} width={400} speed={0.4} />
       </div>
 
@@ -39,9 +42,12 @@ function Home() {
             <Loading />
           </div>
         ) : (
-          <text id="big-title" className=" text-justify dark:text-white">
-            {data.content} - {data.author}
-          </text>
+          <div className="flex flex-col w-1/2">
+            <p id="big-title" className=" text-center dark:text-white">
+              {data.content}
+            </p>
+            <p className="place-self-end dark:text-white">~{data.author}</p>
+          </div>
         )}
       </div>
     </div>
