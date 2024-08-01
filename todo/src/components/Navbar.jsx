@@ -12,7 +12,7 @@ export default function Navbar({
       className={
         navStyle
           ? navStyle
-          : " relative flex justify-end p-1 gap-x-3 justify-items-center place-items-center"
+          : " relative flex justify-end p-1 gap-x-3 justify-items-center place-items-center dark:bg-gray-800 bg-zinc-300"
       }
     >
       {anchorList &&
@@ -20,7 +20,7 @@ export default function Navbar({
           return (
             <Link
               key={index}
-              className={style ? style : "hover:bg-gray-300 rounded-xl p-1"}
+              className={style ? style : "hover:bg-gray-400 dark:hover:bg-gray-700 dark:bg-gray-800 rounded-xl p-1 dark:text-white"}
               to={ref}
             >
               {text}

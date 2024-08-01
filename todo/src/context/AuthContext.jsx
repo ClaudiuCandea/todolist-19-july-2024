@@ -7,12 +7,18 @@ export const AuthProvider = ({ children }) => {
     const storedAuthState = localStorage.getItem('isAuthenticated');
     return storedAuthState ? JSON.parse(storedAuthState) : false;
   });
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
   const login = () => {
     setIsAuthenticated(true)
 
   };
-  const logout = () => setIsAuthenticated(false);
+  const logout = async () => {
+    setIsAuthenticated(false);
+    await delay(500);
+    localStorage.removeItem('profile');
+    window.location.reload();
+  };
 
   useEffect(() => {
     localStorage.setItem('isAuthenticated', JSON.stringify(isAuthenticated));
