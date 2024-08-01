@@ -13,9 +13,7 @@ const TodoListPage = () => {
   const profile = localStorage.getItem("profile")
     ? JSON.parse(localStorage.getItem("profile"))
     : null;
-  const filteredTodos = state?.todos?.filter(
-    (todo) => todo.userId === profile.id
-  );
+  const filteredTodos = state?.todos;
 
   return (
     <div className="container mx-auto p-6">
@@ -44,7 +42,7 @@ const TodoListPage = () => {
       <ul className="todo-list grid grid-cols-1 xl:grid-cols-2 gap-4">
         {filteredTodos.map((todo) => (
           <li className="todo-item md:flex" key={todo.id}>
-            <ToDoItem todo={todo} />
+            <ToDoItem todo={todo} isPublic={false} isOwner={true} />
           </li>
         ))}
       </ul>

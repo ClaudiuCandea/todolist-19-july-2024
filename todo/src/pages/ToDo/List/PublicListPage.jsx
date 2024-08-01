@@ -1,15 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoMdAdd, IoMdDownload } from "react-icons/io";
 import ToDoItem from "../../../components/ToDoItem";
 import { useNavigate } from "react-router-dom";
 import { TodoContext } from "../../../context/TodoContext";
 import PieChart from "../../../components/PieChart";
 import { exportToExcel } from "../../../utils/exportModule";
+import TodoService from "../../../services/TodoService/TodoService";
 
 const PublicTodoListPage = () => {
   const navigate = useNavigate();
-  const { state } = useContext(TodoContext);
-  const todos = state?.todos;
+  const [todos, setTodos] = useState([]);
+  useEffect(() => {
+    const fetchAllTodos = async () => {
+      setTodos(await TodoService.getAllTodos(profile.id));
+    };
+    fetchAllTodos();
+  }, []);
+
+  const profile = localStorage.getItem("profile")
+    ? JSON.parse(localStorage.getItem("profile"))
+    : null;
 
   return (
     <div className="container mx-auto p-6">
@@ -36,7 +46,11 @@ const PublicTodoListPage = () => {
       <ul className="todo-list grid grid-cols-1 xl:grid-cols-2 gap-4">
         {todos.map((todo) => (
           <li className="todo-item md:flex" key={todo.id}>
-            <ToDoItem todo={todo} isPublic={true} />
+            <ToDoItem
+              todo={todo}
+              isPublic={true}
+              isOwner={todo.userId == profile.id}
+            />
           </li>
         ))}
       </ul>

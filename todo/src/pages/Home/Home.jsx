@@ -22,8 +22,11 @@ function Home() {
   error && toast.error(error);
 
   return (
-    <div id="container" className=" flex flex-col h-screen gap-0">
-      <div id="lottie" className=" justify-end w-auto h-auto p-5 bg-cyan-900">
+    <div id="container" className=" flex flex-col h-screen gap-0 ">
+      <div
+        id="lottie"
+        className=" flex flex-col h-screen w-screen bg-cyan-900  "
+      >
         <Lottie options={defaultOptions} height={400} width={400} speed={0.4} />
       </div>
 
@@ -40,7 +43,7 @@ function Home() {
           </div>
         ) : (
           <div className="flex flex-col w-1/2">
-            <p id="big-title" className=" text-justify">
+            <p id="big-title" className=" text-center">
               {data.content}
             </p>
             <p className="place-self-end">~{data.author}</p>

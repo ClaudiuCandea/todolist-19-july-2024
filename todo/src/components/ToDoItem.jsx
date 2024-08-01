@@ -5,7 +5,7 @@ import { GrUpdate } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 import { TodoContext } from "../context/TodoContext";
 
-function TodoItem({ todo, isPublic }) {
+function TodoItem({ todo, isPublic, isOwner }) {
   const navigate = useNavigate();
   const { deleteTodo, updateTodoById } = useContext(TodoContext);
   const imageURL = process.env.REACT_APP_IMAGE_GENERATOR_URL + todo.id;
@@ -16,10 +16,10 @@ function TodoItem({ todo, isPublic }) {
         <img alt="robots" src={imageURL} />
 
         {isPublic ? (
-          <div className="flex flex-row overflow-hidden place-items-center gap-2 ">
+          <div className="flex flex-row overflow-hidden place-items-center gap-2">
             ID:
-            <div className=" overflow-clip">
-              <div className="hover:animate-rightToLeft text-clip ">
+            <div className=" overflow-clip ">
+              <div className=" hover:animate-rightToLeft text-clip">
                 {todo.userId}
               </div>
             </div>
@@ -33,33 +33,38 @@ function TodoItem({ todo, isPublic }) {
             <h3 className="text-xl font-bold">{todo.name}</h3>
             <p className="text-sm text-gray-600 italic">{todo.category}</p>
           </div>
-          <div className="flex gap-1">
-            <button
-              onClick={() => {
-                updateTodoById(todo.id, { ...todo, favorite: !todo.favorite });
-              }}
-              className="bg-gray-100 px-3 py-1 rounded transition duration-200"
-            >
-              <MdStar
-                className="text-2xl"
-                color={todo.favorite ? "orange" : "black"}
-              />
-            </button>
-            <button
-              onClick={() => navigate(`/todo/${todo.id}`)}
-              className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition duration-200"
-            >
-              <MdEdit className="text-2xl" />
-            </button>
-            <button
-              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition duration-200"
-              onClick={() => deleteTodo(todo.id)}
-            >
-              <MdDelete className="text-2xl" />
-            </button>
-          </div>
+          {isOwner ? (
+            <div className="flex gap-1">
+              <button
+                onClick={() => {
+                  updateTodoById(todo.id, {
+                    ...todo,
+                    favorite: !todo.favorite,
+                  });
+                }}
+                className="bg-gray-100 px-3 py-1 rounded transition duration-200"
+              >
+                <MdStar
+                  className="text-2xl"
+                  color={todo.favorite ? "orange" : "black"}
+                />
+              </button>
+              <button
+                onClick={() => navigate(`/todo/${todo.id}`)}
+                className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition duration-200"
+              >
+                <MdEdit className="text-2xl" />
+              </button>
+              <button
+                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition duration-200"
+                onClick={() => deleteTodo(todo.id)}
+              >
+                <MdDelete className="text-2xl" />
+              </button>
+            </div>
+          ) : null}
         </div>
-        <p className="text-gray-700 mb-4 flex-grow">{todo.description}</p>
+        <p className="text-gray-700 mb-4 flex-grow p-3">{todo.description}</p>
         <div className="text-sm text-gray-500 flex justify-between">
           <div className="flex gap-1 items-center">
             <CiCalendar className="text-2xl" />

@@ -12,7 +12,7 @@ export default function Navbar({
       className={
         navStyle
           ? navStyle
-          : " relative flex justify-end p-1 gap-x-3 justify-items-center place-items-center"
+          : "flex justify-end p-1 gap-x-3 justify-items-center place-items-center"
       }
     >
       {anchorList &&
