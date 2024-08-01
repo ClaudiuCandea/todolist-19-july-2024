@@ -32,7 +32,7 @@ export default function Profile({ picture, name, mail }) {
       </button>
 
       {isClicked && (
-        <div className="absolute right-0 top-full mt-2 dark:bg-white bg-gray-200 rounded-md p-3 flex flex-col place-items-center gap-y-1">
+        <div className="absolute right-0 top-full mt-2 dark:bg-white bg-gray-200 rounded-md p-3 flex flex-col place-items-center gap-y-1 z-50">
           <div className="flex flex-row">
             <img
               src={picture ? picture : ""}
