@@ -1,6 +1,5 @@
-import React, { createContext, useReducer, useEffect, useState } from 'react';
-import TodoService from '../services/TodoService/TodoService';
-
+import React, { createContext, useReducer, useEffect, useState } from "react";
+import TodoService from "../services/TodoService/TodoService";
 
 export const TodoContext = createContext();
 
@@ -45,7 +44,9 @@ function todoReducer(state, action) {
 }
 
 const getProfileFromLocalStorage = () => {
-  return localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile')) : null;
+  return localStorage.getItem("profile")
+    ? JSON.parse(localStorage.getItem("profile"))
+    : null;
 };
 
 export function TodoProvider({ children }) {
@@ -53,8 +54,7 @@ export function TodoProvider({ children }) {
   const [profile] = useState(getProfileFromLocalStorage());
   useEffect(() => {
     const fetchTodos = async () => {
-      if(profile && profile.id) {
-
+      if (profile && profile.id) {
         dispatch({ type: ACTIONS.SET_LOADING, payload: true });
         const todos = await TodoService.getTodos(profile.id);
         dispatch({ type: ACTIONS.SET_TODOS, payload: todos });
@@ -66,9 +66,15 @@ export function TodoProvider({ children }) {
 
   const updateTodoById = async (id, todo) => {
     try {
-      const updatedTodo = await TodoService.updateTodoById(profile.id, id, todo);
-      dispatch({ type: ACTIONS.SET_TODOS, payload: state.todos.map(t => (t.id === id ? updatedTodo : t)) });
-
+      const updatedTodo = await TodoService.updateTodoById(
+        profile.id,
+        id,
+        todo
+      );
+      dispatch({
+        type: ACTIONS.SET_TODOS,
+        payload: state.todos.map((t) => (t.id === id ? updatedTodo : t)),
+      });
     } catch (error) {
       console.log("Todo update error", error);
     }

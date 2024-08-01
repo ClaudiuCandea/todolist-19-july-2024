@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { TodoContext } from "../../../context/TodoContext";
 import { useAuth } from "../../../hooks/useAuth";
 import PieChart from '../../../components/PieChart';
+import { exportToExcel } from "../../../utils/exportModule";
 import FilterDrawer from "../../../components/FilterDrawer";
 import Pagination from "../../../components/Pagination";
 import ToDoFilter from "../../../components/ToDoFilter";
@@ -81,6 +82,15 @@ const TodoListPage = () => {
                                 >
                                     <IoMdAdd className="text-xl"/>
                                     Add Task
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        exportToExcel(filteredTodos, profile.name + "' Todo")
+                                    }
+                                    className="text-white font-bold bg-blue-500 transition duration-200 hover:bg-blue-300 px-4 py-2 rounded flex items-center"
+                                >
+                                    <IoMdDownload className="text-xl" />
+                                    Export to Excel
                                 </button>
                                 <button
                                     onClick={() => setDrawerOpen(true)}

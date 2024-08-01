@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import Lottie from "react-lottie";
-import tree from "../../utilitare/tree.json";
+import tree from "../../utils/tree.json";
 import { toast } from "react-hot-toast";
-import { useQuote } from "../../utilitare/hooks";
-import { ReactComponent as Loading } from "../../utilitare/loading.svg";
+import { useQuote } from "../../hooks/useQuote";
+import { ReactComponent as Loading } from "../../utils/loading.svg";
 
 function Home() {
   const defaultOptions = useMemo(() => {
