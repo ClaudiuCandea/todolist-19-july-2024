@@ -8,15 +8,15 @@ import { routes } from '../routes/routes';
 const CreateTodoForm = ({initialValues}) => {
     const { profile } = useAuth();
     const navigate = useNavigate();
-    function handleSubmit(values){
-        values.userId = profile.id
-        values.createdAt = new Date()
-        values.updatedAt =  new Date()
-        values.favorite = false;
-        TodoService.postTodo(values)
-        navigate(routes.todo)
-        window.location.reload()
-    } 
+    async function handleSubmit(values){
+      values.userId = profile.id
+      values.createdAt = new Date()
+      values.updatedAt =  new Date()
+      values.favorite = false;
+      await TodoService.postTodo(values)
+      navigate(routes.todo)
+      window.location.reload()
+  }
     const attributes = useMemo(
       () => [
           { name: "name", label: "Name" },
