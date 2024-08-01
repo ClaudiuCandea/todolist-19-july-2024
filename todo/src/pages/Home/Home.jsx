@@ -1,10 +1,9 @@
 import React, { useMemo } from "react";
 import Lottie from "react-lottie";
-import tree from "../../utilitare/tree.json";
-import Navbar from "../../components/Navbar";
+import tree from "../../utils/tree.json";
 import { toast } from "react-hot-toast";
-import { useQuote } from "../../utilitare/hooks";
-import Profile from "../../components/Profile";
+import { useQuote } from "../../Hooks/useQuote";
+import { ReactComponent as Loading } from "../../utils/loading.svg";
 
 function Home() {
   const defaultOptions = useMemo(() => {
@@ -37,11 +36,7 @@ function Home() {
         </text>
         {isLoading ? (
           <div className="flex justify-center items-center">
-            <img
-              className="h-14 w-14"
-              src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
-              alt=""
-            ></img>
+            <Loading />
           </div>
         ) : (
           <text id="big-title" className=" text-justify">
