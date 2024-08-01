@@ -34,15 +34,24 @@ const PieChart = ({todos}) => {
         color: textColor
       }
     }
+
+    const hasData = data && data.length > 1;
+
     return(
       <div className="bg-gray-200 dark:bg-gray-900 dark:text-white p-4 shadow">
-        <Chart
+        {hasData ? (
+          <Chart
             chartType="PieChart"
             data={data}
             options={options}
             width={"100%"}
             height={"400px"}
-        />
+          />
+        ) : (
+          <div className={`text-center text-lg ${darkMode ? 'text-white' : 'text-black'}`}>
+            No data available
+          </div>
+        )}
       </div>  
     )
 }
