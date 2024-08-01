@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit, MdStar } from "react-icons/md";
 import { CiCalendar } from "react-icons/ci";
 import { GrUpdate } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
@@ -7,12 +7,12 @@ import { TodoContext } from "../context/TodoContext";
 
 function TodoItem({ todo }) {
   const navigate = useNavigate();
-  const { deleteTodo } = useContext(TodoContext);
-  const imageURL = process.env.REACT_APP_IMAGE_GENERATOR_URL + todo.id
+  const { deleteTodo, updateTodoById } = useContext(TodoContext);
+  const imageURL = process.env.REACT_APP_IMAGE_GENERATOR_URL + todo.id;
 
   return (
     <div className="bg-white shadow-md rounded-lg p-6 mb-4 flex flex-row break-words md:flex-1 h-full">
-      <img alt='robots' src={imageURL} width="150" height="150" />
+      <img alt="robots" src={imageURL} width="150" height="150" />
       <div className="flex flex-col break-words md:flex-1 h-full">
         <div className="flex justify-between items-center mb-4">
           <div>
@@ -20,6 +20,17 @@ function TodoItem({ todo }) {
             <p className="text-sm text-gray-600 italic">{todo.category}</p>
           </div>
           <div className="flex gap-1">
+            <button
+              onClick={() => {
+                updateTodoById(todo.id, { ...todo, favorite: !todo.favorite });
+              }}
+              className="bg-gray-100 px-3 py-1 rounded transition duration-200"
+            >
+              <MdStar
+                className="text-2xl"
+                color={todo.favorite ? "orange" : "black"}
+              />
+            </button>
             <button
               onClick={() => navigate(`/todo/${todo.id}`)}
               className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition duration-200"
