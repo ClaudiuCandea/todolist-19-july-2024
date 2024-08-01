@@ -64,7 +64,9 @@ function TodoItem({ todo, isPublic }) {
           </button>
           <button
             className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition duration-200"
-            onClick={() => deleteTodo(todo.id)}
+            onClick={async () => { await deleteTodo(todo.id)
+              window.location.reload()
+            }}
           >
             <MdDelete className="text-2xl" />
           </button>
