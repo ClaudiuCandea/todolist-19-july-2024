@@ -19,7 +19,7 @@ function TodoModal({ todo }) {
 
             {isOpen && (
                 <>
-                    <div className="fixed inset-0 z-40 bg-black bg-opacity-60"></div>
+                    <div className="fixed inset-0 z-40 backdrop-blur-sm bg-black bg-opacity-50"></div>
                     <div className="fixed inset-0 z-50 flex items-center justify-center">
                         <div className="bg-white dark:bg-gray-800 w-11/12 max-w-lg rounded-lg overflow-hidden shadow-lg p-6 relative">
                             <img

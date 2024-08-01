@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
-import { Formik, Form, Field } from 'formik';
-import  TodoService  from '../services/TodoService/TodoService';
-import { useNavigate } from 'react-router-dom';
+import React, { useMemo } from "react";
+import { Formik, Form, Field } from "formik";
+import TodoService from "../services/TodoService/TodoService";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from '../hooks/useAuth';
 
 const CreateTodoForm = ({initialValues}) => {
@@ -12,6 +12,7 @@ const CreateTodoForm = ({initialValues}) => {
         values.createdAt = new Date()
         values.updatedAt =  new Date()
         TodoService.postTodo(values)
+        values.favorite = false;
         navigate('/todo')
         window.location.reload()
     } 

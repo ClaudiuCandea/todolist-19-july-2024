@@ -19,6 +19,7 @@ import Navbar from "../components/Navbar";
 import Profile from "../components/Profile";
 import { DarkModeProvider } from '../context/DarkModeContext';
 import { useMemo } from "react";
+import PublicTodoListPage from "../pages/ToDo/List/PublicListPage";
 
 const ConditionalNavbar = () => {
   const location = useLocation();
@@ -83,6 +84,16 @@ function App() {
             }
           />
             <Route
+            path="/todo/public"
+            element={
+              isAuthenticated ? (
+                <PublicTodoListPage />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
             path="*"
             element={
               !isAuthenticated ? (
