@@ -135,7 +135,7 @@ const TodoListPage = () => {
             totalItems={filteredTodos.length}
           />
 
-          <h1 className="font-bold text-xl flex justify-center mt-6 dark:bg-gray-500 dark:text-white dark:text-white">
+          <h1 className="font-bold text-xl flex justify-center mt-6 dark:bg-gray-500 dark:text-white">
             Stats for my todos
           </h1>
           <PieChart className="mt-10" todos={filteredTodos}></PieChart>
