@@ -9,7 +9,7 @@ const TodoUpdateSchema = Yup.object().shape({
         .required("Required"),
     description: Yup.string()
         .min(2, "Too Short!")
-        .max(50, "Too Long!")
+        .max(5000, "Too Long!")
         .required("Required"),
     category: Yup.string()
         .min(2, "Too Short!")

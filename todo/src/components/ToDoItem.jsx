@@ -47,10 +47,12 @@ function TodoItem({ todo }) {
           className={`dark:text-gray-300 text-gray-600 mb-4 flex-grow max-w-[300px] ${
             showFullDescription ? "text-ellipsis" : ""
           }`}
-        >
+          >
           {truncatedDescription}
           {todo.description.length > MAX_DESCRIPTION_LENGTH && (
-            <TodoModal todo={todo}/>
+            <div>
+              <TodoModal todo={todo}/>
+            </div>
           )}
         </p>
       <div className="text-sm dark:text-gray-200  text-gray-700 flex justify-between">
