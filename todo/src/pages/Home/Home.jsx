@@ -39,9 +39,12 @@ function Home() {
             <Loading />
           </div>
         ) : (
-          <text id="big-title" className=" text-justify">
-            {data.content} - {data.author}
-          </text>
+          <div className="flex flex-col w-1/2">
+            <p id="big-title" className=" text-justify">
+              {data.content}
+            </p>
+            <p className="place-self-end">~{data.author}</p>
+          </div>
         )}
       </div>
     </div>
