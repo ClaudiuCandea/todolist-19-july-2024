@@ -3,6 +3,7 @@ import { Formik, Form, Field } from "formik";
 import TodoService from "../services/TodoService/TodoService";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../hooks/useAuth';
+import { routes } from '../routes/routes';
 
 const CreateTodoForm = ({initialValues}) => {
     const { profile } = useAuth();
@@ -11,9 +12,9 @@ const CreateTodoForm = ({initialValues}) => {
         values.userId = profile.id
         values.createdAt = new Date()
         values.updatedAt =  new Date()
-        TodoService.postTodo(values)
         values.favorite = false;
-        navigate('/todo')
+        TodoService.postTodo(values)
+        navigate(routes.todo)
         window.location.reload()
     } 
     const attributes = useMemo(
