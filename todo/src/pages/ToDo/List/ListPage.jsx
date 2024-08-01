@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react';
-import { IoMdAdd, IoMdMenu } from "react-icons/io";
+import {IoMdAdd, IoMdDownload, IoMdMenu} from "react-icons/io";
 import ToDoItem from "../../../components/ToDoItem";
 import { useNavigate } from "react-router-dom";
 import { TodoContext } from "../../../context/TodoContext";
@@ -85,11 +85,11 @@ const TodoListPage = () => {
                                 </button>
                                 <button
                                     onClick={() =>
-                                        exportToExcel(filteredTodos, profile.name + "' Todo")
+                                        exportToExcel(filteredTodos, user.profile.name + "' Todo")
                                     }
                                     className="text-white font-bold bg-blue-500 transition duration-200 hover:bg-blue-300 px-4 py-2 rounded flex items-center"
                                 >
-                                    <IoMdDownload className="text-xl" />
+                                    <IoMdDownload className="text-xl"/>
                                     Export to Excel
                                 </button>
                                 <button
