@@ -164,7 +164,6 @@ const TodoListPage = () => {
       <PieChart className="mt-10" todos={todos}></PieChart>
     </div>
 
-    </div>
   );
 };
 
