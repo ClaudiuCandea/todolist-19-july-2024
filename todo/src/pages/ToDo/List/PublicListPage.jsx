@@ -22,9 +22,10 @@ const PublicTodoListPage = () => {
     : null;
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="min-h-screen flex flex-col dark:bg-gray-900">
+    <div className="container mx-auto p-6 ">
       <div className="flex flex-col items-start gap-8 mb-6">
-        <h2 className="text-3xl">Todo List</h2>
+        <h2 className="text-3xl dark:text-white">Todo List</h2>
         <div id="buttons-wrap" className="flex flex-row gap-3">
           <button
             onClick={() => navigate(`/todo/create`)}
@@ -58,6 +59,7 @@ const PublicTodoListPage = () => {
         Stats for my todos
       </h1>
       <PieChart className="mt-10" todos={todos}></PieChart>
+    </div>
     </div>
   );
 };

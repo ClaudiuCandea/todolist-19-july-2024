@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
+  darkMode: 'class',
   theme: {
     extend: {
       keyframes: {
@@ -21,6 +22,9 @@ module.exports = {
     extend: {
       animation: ["hover"],
     },
+  },
+  variants: {
+    extend: {},
   },
   plugins: [],
 };
