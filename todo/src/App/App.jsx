@@ -13,10 +13,11 @@ import TodoCreatePage from "../pages/ToDo/Create/CreatePage";
 import { Toaster } from "react-hot-toast";
 import Home from "../pages/Home/Home";
 import LoginPage from "../pages/Login/GoogleLogin";
-import { useAuth } from "../Hooks/useAuth";
+import { useAuth } from "../hooks/useAuth";
 import { routesCfg } from "../routes/routes";
 import Navbar from "../components/Navbar";
 import Profile from "../components/Profile";
+import { DarkModeProvider } from '../context/DarkModeContext';
 import { useMemo } from "react";
 import PublicTodoListPage from "../pages/ToDo/List/PublicListPage";
 
@@ -49,39 +50,40 @@ function App() {
   const { isAuthenticated } = useAuth();
 
   return (
-    <>
+      <>
       <Router>
-        <ConditionalNavbar />
+      <DarkModeProvider>
+          <ConditionalNavbar />
         <Routes>
-          <Route
+            <Route
             path="/login"
             element={!isAuthenticated ? <LoginPage /> : <Navigate to="/home" />}
           />
-          <Route
+            <Route
             path="/home"
             element={
               isAuthenticated ? <Home paths={[]} /> : <Navigate to="/login" />
             }
           />
-          <Route
+            <Route
             path="/todo"
             element={
               isAuthenticated ? <TodoListPage /> : <Navigate to="/login" />
             }
           />
-          <Route
+            <Route
             path="/todo/:id"
             element={
               isAuthenticated ? <TodoUpdatePage /> : <Navigate to="/login" />
             }
           />
-          <Route
+            <Route
             path="/todo/create"
             element={
               isAuthenticated ? <TodoCreatePage /> : <Navigate to="/login" />
             }
           />
-          <Route
+            <Route
             path="/todo/public"
             element={
               isAuthenticated ? (
@@ -101,9 +103,10 @@ function App() {
               )
             }
           />
-        </Routes>
-        <Toaster />
-      </Router>
+          </Routes>
+          <Toaster />
+      </DarkModeProvider>
+        </Router>
     </>
   );
 }
