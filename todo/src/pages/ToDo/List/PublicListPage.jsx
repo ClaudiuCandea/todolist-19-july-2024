@@ -151,19 +151,7 @@ const TodoListPage = () => {
           onClose={() => setDrawerOpen(false)}
         />
       )}
-      <ul className="todo-list grid grid-cols-1 xl:grid-cols-2 gap-4">
-        {todos.map((todo) => (
-          <li className="todo-item md:flex" key={todo.id}>
-            <ToDoItem todo={todo} isPublic={true} />
-          </li>
-        ))}
-      </ul>
-      <h1 className="font-bold text-xl flex justify-center mt-6 dark:text-white">
-        Stats for my todos
-      </h1>
-      <PieChart className="mt-10" todos={todos}></PieChart>
     </div>
-
   );
 };
 

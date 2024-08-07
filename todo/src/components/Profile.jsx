@@ -17,7 +17,7 @@ export default function Profile({ picture, name, mail }) {
       <img
         src={picture ? picture : ""}
         alt="Profile"
-        className="bg-red-600 rounded-full w-9 h-9"
+        className="rounded-full w-9 h-9"
       ></img>
 
       <label>{name ? name : "Placeholder nume"}</label>
@@ -48,9 +48,10 @@ export default function Profile({ picture, name, mail }) {
             </div>
           </div>
 
-          <button className=" flex place-items-center justify-center bg-gray-100 rounded-md p-2 gap-2 w-full"
+          <button
+            className=" flex place-items-center justify-center bg-gray-100 rounded-md p-2 gap-2 w-full"
             onClick={logout}
-            >
+          >
             <CiLogout size={32} /> <p>Logout</p>
           </button>
 

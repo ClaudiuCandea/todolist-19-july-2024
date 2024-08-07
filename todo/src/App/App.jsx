@@ -17,7 +17,7 @@ import { useAuth } from "../hooks/useAuth";
 import { routesCfg } from "../routes/routes";
 import Navbar from "../components/Navbar";
 import Profile from "../components/Profile";
-import { DarkModeProvider } from '../context/DarkModeContext';
+import { DarkModeProvider } from "../context/DarkModeContext";
 import { useMemo } from "react";
 import PublicTodoListPage from "../pages/ToDo/List/PublicListPage";
 
@@ -50,63 +50,65 @@ function App() {
   const { isAuthenticated } = useAuth();
 
   return (
-      <>
+    <>
       <Router>
-      <DarkModeProvider>
+        <DarkModeProvider>
           <ConditionalNavbar />
-        <Routes>
+          <Routes>
             <Route
-            path="/login"
-            element={!isAuthenticated ? <LoginPage /> : <Navigate to="/home" />}
-          />
+              path="/login"
+              element={
+                !isAuthenticated ? <LoginPage /> : <Navigate to="/home" />
+              }
+            />
             <Route
-            path="/home"
-            element={
-              isAuthenticated ? <Home paths={[]} /> : <Navigate to="/login" />
-            }
-          />
+              path="/home"
+              element={
+                isAuthenticated ? <Home paths={[]} /> : <Navigate to="/login" />
+              }
+            />
             <Route
-            path="/todo"
-            element={
-              isAuthenticated ? <TodoListPage /> : <Navigate to="/login" />
-            }
-          />
+              path="/todo"
+              element={
+                isAuthenticated ? <TodoListPage /> : <Navigate to="/login" />
+              }
+            />
             <Route
-            path="/todo/:id"
-            element={
-              isAuthenticated ? <TodoUpdatePage /> : <Navigate to="/login" />
-            }
-          />
+              path="/todo/:id"
+              element={
+                isAuthenticated ? <TodoUpdatePage /> : <Navigate to="/login" />
+              }
+            />
             <Route
-            path="/todo/create"
-            element={
-              isAuthenticated ? <TodoCreatePage /> : <Navigate to="/login" />
-            }
-          />
+              path="/todo/create"
+              element={
+                isAuthenticated ? <TodoCreatePage /> : <Navigate to="/login" />
+              }
+            />
             <Route
-            path="/todo/public"
-            element={
-              isAuthenticated ? (
-                <PublicTodoListPage />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
-          <Route
-            path="*"
-            element={
-              !isAuthenticated ? (
-                <Navigate to="/login" />
-              ) : (
-                <Navigate to="/home" />
-              )
-            }
-          />
+              path="/todo/public"
+              element={
+                isAuthenticated ? (
+                  <PublicTodoListPage />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="*"
+              element={
+                !isAuthenticated ? (
+                  <Navigate to="/login" />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              }
+            />
           </Routes>
           <Toaster />
-      </DarkModeProvider>
-        </Router>
+        </DarkModeProvider>
+      </Router>
     </>
   );
 }
